@@ -1,4 +1,4 @@
-package com.ludigi.product.adapter.in.api;
+package com.ludigi.product.adapter.in.rest;
 
 import com.ludigi.product.ProductId;
 import com.ludigi.product.port.in.CreateProductPort;
@@ -27,7 +27,7 @@ class CreateProductRestAdapterTest {
     @Test
     void shouldCreateProduct() {
         String id = UUID.randomUUID().toString();
-        when(createProductPort.createProduct(any())).thenReturn(new ProductId(id));
+        when(createProductPort.createProduct(any(), any())).thenReturn(new ProductId(id));
 
         CreateProductRestAdapter.CreateProductRequest createProductRequest = new CreateProductRestAdapter.CreateProductRequest("new product", "new product description");
         ResponseEntity<Void> response = testRestTemplate.postForEntity("/api/products", createProductRequest, Void.class);

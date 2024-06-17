@@ -1,6 +1,5 @@
 package com.ludigi.product;
 
-import com.ludigi.product.adapter.out.InMemoryProductPersistenceAdapter;
 import com.ludigi.product.adapter.out.JpaProductPersistenceAdapter;
 import com.ludigi.product.adapter.out.ProductEntityRepository;
 import com.ludigi.product.port.in.CreateProductPort;

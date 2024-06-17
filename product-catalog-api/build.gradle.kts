@@ -9,6 +9,7 @@ apply(from = rootProject.file("buildSrc/shared.gradle.kts"))
 dependencies {
     implementation(project(":product-catalog-domain"))
     implementation (libs.spring.boot.starter.web)
+    implementation (libs.spring.boot.starter.oauth2.resource.server)
     testImplementation (libs.spring.boot.starter.test)
     testRuntimeOnly(libs.junit.platform.launcher)
 }

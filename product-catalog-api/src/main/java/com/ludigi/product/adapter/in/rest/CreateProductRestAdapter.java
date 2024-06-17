@@ -1,4 +1,4 @@
-package com.ludigi.product.adapter.in.api;
+package com.ludigi.product.adapter.in.rest;
 
 import com.ludigi.product.ProductId;
 import com.ludigi.product.port.in.CreateProductPort;
@@ -19,7 +19,8 @@ public class CreateProductRestAdapter {
     @PostMapping("/api/products")
     ResponseEntity<?> createProduct(@RequestBody CreateProductRequest request) {
         var createProductCommand = new CreateProductPort.CreateProductCommand(request.name, request.description);
-        ProductId productId = createProductPort.createProduct(createProductCommand);
+        //TODO userId z security context
+        ProductId productId = createProductPort.createProduct(createProductCommand, null);
         return ResponseEntity.created(
                 ServletUriComponentsBuilder
                         .fromCurrentRequest()
