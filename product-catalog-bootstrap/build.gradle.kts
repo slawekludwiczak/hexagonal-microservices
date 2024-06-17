@@ -8,7 +8,9 @@ apply(from = rootProject.file("buildSrc/shared.gradle.kts"))
 
 dependencies {
     implementation(project(":product-catalog-domain"))
-    implementation (libs.spring.boot.starter.web)
+    implementation(project(":product-catalog-api"))
+    implementation(project(":product-catalog-persistence"))
+    implementation (libs.spring.boot.starter)
     testImplementation (libs.spring.boot.starter.test)
 }
 

@@ -7,7 +7,7 @@ import com.ludigi.product.port.out.ProductPersistPort;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ProductPersistenceAdapter implements ProductPersistPort {
+public class InMemoryProductPersistenceAdapter implements ProductPersistPort {
     private final Map<ProductId, Product> products = new HashMap<>();
 
     @Override
