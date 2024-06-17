@@ -2,12 +2,14 @@ package com.ludigi.product.adapter.out;
 
 import com.ludigi.product.Product;
 
+import java.util.UUID;
+
 class ProductEntityMapper {
     static ProductEntity from(Product product) {
         ProductEntity entity = new ProductEntity();
-        entity.setId(Long.valueOf(product.getId().id()));
-        entity.setName(product.getTitle());
-        entity.setDescription(entity.getDescription());
+        entity.setId(UUID.fromString(product.getId().id()));
+        entity.setName(product.getName());
+        entity.setDescription(product.getDescription());
         return entity;
     }
 }

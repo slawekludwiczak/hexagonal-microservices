@@ -5,29 +5,30 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 @Table(name = "product")
 class ProductEntity {
     @Id
-    private Long id;
+    private UUID id;
     private String name;
     private String description;
 
     public ProductEntity() {
     }
 
-    public ProductEntity(Long id, String name, String description) {
+    public ProductEntity(UUID id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

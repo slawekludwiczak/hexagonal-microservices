@@ -4,6 +4,7 @@ import com.ludigi.product.ProductId;
 import com.ludigi.product.port.in.CreateProductPort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,7 +17,7 @@ public class CreateProductRestAdapter {
     }
 
     @PostMapping("/api/products")
-    ResponseEntity<?> createProduct(CreateProductRequest request) {
+    ResponseEntity<?> createProduct(@RequestBody CreateProductRequest request) {
         var createProductCommand = new CreateProductPort.CreateProductCommand(request.name, request.description);
         ProductId productId = createProductPort.createProduct(createProductCommand);
         return ResponseEntity.created(

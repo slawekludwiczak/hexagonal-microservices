@@ -11,7 +11,7 @@ public class ProductCrudService implements CreateProductPort {
     }
 
     public ProductId createProduct(CreateProductCommand createProductCommand) {
-        Product product = Product.withoutId(createProductCommand.title(), createProductCommand.description());
+        Product product = Product.withoutId(createProductCommand.name(), createProductCommand.description());
         productPersistPort.save(product);
         return product.getId();
     }

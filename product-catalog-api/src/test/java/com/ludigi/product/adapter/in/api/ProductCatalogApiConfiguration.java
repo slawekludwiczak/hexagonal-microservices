@@ -1,12 +1,8 @@
 package com.ludigi.product.adapter.in.api;
 
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootConfiguration
-@EnableAutoConfiguration
-@ComponentScan
+@SpringBootApplication
 class ProductCatalogApiConfiguration {
     
 }

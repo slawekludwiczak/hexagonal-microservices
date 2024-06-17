@@ -6,6 +6,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.orm.jpa.JpaSystemException;
 
+import java.util.UUID;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -15,9 +17,10 @@ class JpaProductPersistenceAdapterTest {
 
     @Test
     void shouldPersistCompleteEntity() {
-        ProductEntity productEntity = new ProductEntity(1L, "test", "test description");
+        UUID randomUUID = UUID.randomUUID();
+        ProductEntity productEntity = new ProductEntity(randomUUID, "test", "test description");
         productEntityRepository.save(productEntity);
-        assertNotNull(productEntityRepository.findById(1L));
+        assertNotNull(productEntityRepository.findById(randomUUID));
     }
 
     @Test

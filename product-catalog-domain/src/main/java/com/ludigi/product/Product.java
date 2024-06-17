@@ -5,12 +5,12 @@ import java.util.UUID;
 
 public class Product {
     private ProductId id;
-    private String title;
+    private String name;
     private String description;
 
     private Product(ProductId id, String title, String description) {
         this.id = id;
-        this.title = title;
+        this.name = title;
         this.description = description;
     }
 
@@ -32,8 +32,8 @@ public class Product {
         return id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
@@ -45,19 +45,19 @@ public class Product {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return Objects.equals(id, product.id) && Objects.equals(title, product.title) && Objects.equals(description, product.description);
+        return Objects.equals(id, product.id) && Objects.equals(name, product.name) && Objects.equals(description, product.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, description);
+        return Objects.hash(id, name, description);
     }
 
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", title='" + title + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 '}';
     }

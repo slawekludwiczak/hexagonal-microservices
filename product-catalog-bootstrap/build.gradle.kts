@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":product-catalog-persistence"))
     implementation (libs.spring.boot.starter)
     testImplementation (libs.spring.boot.starter.test)
+    testRuntimeOnly(libs.junit.platform.launcher)
 }
 
 tasks.test {

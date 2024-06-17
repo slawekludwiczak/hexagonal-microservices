@@ -1,0 +1,11 @@
+### Save product
+@randomId={{$uuid}}
+@name="product {{randomId}}"
+@description="product description {{randomId}}"
+POST {{host}}:{{port}}/api/products
+Content-Type: application/json
+
+{
+  "name": {{name}},
+  "description": {{description}}
+}
