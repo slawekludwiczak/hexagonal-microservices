@@ -4,8 +4,13 @@
 @description="product description {{randomId}}"
 POST {{host}}:{{port}}/api/products
 Content-Type: application/json
+Authorization: Bearer {{$auth.token("keycloak-config")}}
 
 {
   "name": {{name}},
   "description": {{description}}
 }
+
+### Home
+GET {{host}}:{{port}}/api/hello
+Authorization: Bearer {{$auth.token("keycloak-config")}}
