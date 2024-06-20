@@ -1,14 +1,10 @@
 package com.ludigi.product.adapter.in.rest;
 
 import com.ludigi.product.ProductId;
-import com.ludigi.product.port.in.CreateProductPort;
+import com.ludigi.product.port.in.ProductCommandPort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
-import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,22 +15,24 @@ import java.util.UUID;
 
 @RestController
 public class CreateProductRestAdapter {
-    private final CreateProductPort createProductPort;
+    private final ProductCommandPort productCommandPort;
 
-    public CreateProductRestAdapter(CreateProductPort createProductPort) {
-        this.createProductPort = createProductPort;
+    public CreateProductRestAdapter(ProductCommandPort productCommandPort) {
+        this.productCommandPort = productCommandPort;
     }
 
     @PostMapping("/api/products")
     ResponseEntity<?> createProduct(
             @RequestBody CreateProductRequest request,
-            JwtAuthenticationToken authentication,
             @CurrentSecurityContext(expression = "authentication.principal") Jwt jwt
     ) {
-        var createProductCommand = new CreateProductPort.CreateProductCommand(request.name, request.description);
-        //TODO userId z security context
-        UUID userId = UUID.fromString(jwt.getId());
-        ProductId productId = createProductPort.createProduct(createProductCommand, userId);
+        UUID userId = UUID.fromString(jwt.getSubject());
+        var createProductCommand = new ProductCommandPort.CreateProductCommand(
+                request.name,
+                request.description,
+                userId.toString()
+        );
+        ProductId productId = productCommandPort.createProduct(createProductCommand);
         return ResponseEntity.created(
                 ServletUriComponentsBuilder
                         .fromCurrentRequest()
@@ -46,6 +44,7 @@ public class CreateProductRestAdapter {
 
     @GetMapping("/api/hello")
     String hello(@CurrentSecurityContext(expression = "authentication.principal") Jwt jwt) {
+        String id = jwt.getSubject();
         return "hello";
     }
 

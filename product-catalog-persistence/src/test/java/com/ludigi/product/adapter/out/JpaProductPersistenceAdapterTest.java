@@ -17,10 +17,11 @@ class JpaProductPersistenceAdapterTest {
 
     @Test
     void shouldPersistCompleteEntity() {
-        UUID randomUUID = UUID.randomUUID();
-        ProductEntity productEntity = new ProductEntity(randomUUID, "test", "test description");
+        UUID productId = UUID.randomUUID();
+        UUID userId = UUID.randomUUID();
+        ProductEntity productEntity = new ProductEntity(productId, "test", "test description", userId);
         productEntityRepository.save(productEntity);
-        assertNotNull(productEntityRepository.findById(randomUUID));
+        assertNotNull(productEntityRepository.findById(productId));
     }
 
     @Test
