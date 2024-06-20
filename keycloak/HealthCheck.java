@@ -20,6 +20,7 @@ public class HealthCheck {
         var response = client.send(request, BodyHandlers.ofString());
 
         if (response.statusCode() != 200 || !response.body().contains("UP")) {
+            System.out.println(response.statusCode());
             throw new RuntimeException("Healthcheck failed");
         }
     }
