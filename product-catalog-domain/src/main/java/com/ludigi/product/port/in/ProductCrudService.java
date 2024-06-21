@@ -2,13 +2,15 @@ package com.ludigi.product.port.in;
 
 import com.ludigi.product.Product;
 import com.ludigi.product.ProductId;
-import com.ludigi.product.port.out.ProductPersistPort;
+import com.ludigi.product.port.out.ProductPersistencePort;
 
-public class ProductCrudService implements ProductCommandPort {
-    private final ProductPersistPort productPersistPort;
+import java.util.Optional;
 
-    public ProductCrudService(ProductPersistPort productPersistPort) {
-        this.productPersistPort = productPersistPort;
+public class ProductCrudService implements ProductCommandPort, ProductQueryPort {
+    private final ProductPersistencePort productPersistencePort;
+
+    public ProductCrudService(ProductPersistencePort productPersistencePort) {
+        this.productPersistencePort = productPersistencePort;
     }
 
     public ProductId createProduct(CreateProductCommand createProductCommand) {
@@ -17,7 +19,12 @@ public class ProductCrudService implements ProductCommandPort {
                 createProductCommand.description(),
                 createProductCommand.userId()
         );
-        productPersistPort.save(product);
+        productPersistencePort.save(product);
         return product.getId();
+    }
+
+    @Override
+    public Optional<Product> findById(String id) {
+        return productPersistencePort.findById(id);
     }
 }

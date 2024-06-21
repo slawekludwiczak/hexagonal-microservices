@@ -4,7 +4,7 @@ import com.ludigi.product.adapter.out.JpaProductPersistenceAdapter;
 import com.ludigi.product.adapter.out.ProductEntityRepository;
 import com.ludigi.product.port.in.ProductCommandPort;
 import com.ludigi.product.port.in.ProductCrudService;
-import com.ludigi.product.port.out.ProductPersistPort;
+import com.ludigi.product.port.out.ProductPersistencePort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,12 +12,12 @@ import org.springframework.context.annotation.Configuration;
 public class PersistenceAdapterConfiguration {
 
     @Bean
-    public ProductCommandPort createProductPort(ProductPersistPort productPersistPort) {
-        return new ProductCrudService(productPersistPort);
+    public ProductCommandPort createProductPort(ProductPersistencePort productPersistencePort) {
+        return new ProductCrudService(productPersistencePort);
     }
 
     @Bean
-    public ProductPersistPort productPersistPort(ProductEntityRepository productEntityRepository) {
+    public ProductPersistencePort productPersistPort(ProductEntityRepository productEntityRepository) {
         return new JpaProductPersistenceAdapter(productEntityRepository);
     }
 }
