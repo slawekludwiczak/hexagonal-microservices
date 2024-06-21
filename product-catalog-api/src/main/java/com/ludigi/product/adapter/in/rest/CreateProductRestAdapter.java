@@ -42,12 +42,6 @@ public class CreateProductRestAdapter {
         ).build();
     }
 
-    @GetMapping("/api/hello")
-    String hello(@CurrentSecurityContext(expression = "authentication.principal") Jwt jwt) {
-        String id = jwt.getSubject();
-        return "hello";
-    }
-
     record CreateProductRequest(
             String name,
             String description
