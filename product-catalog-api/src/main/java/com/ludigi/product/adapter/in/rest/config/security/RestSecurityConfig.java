@@ -19,6 +19,7 @@ public class RestSecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers(HttpMethod.POST,"/api/products").access(hasScope("products.write"))
+                                .requestMatchers(HttpMethod.GET,"/actuator/health").permitAll()
                                 .anyRequest().authenticated()
                 ).oauth2ResourceServer(
                         oauth2 -> oauth2.jwt(Customizer.withDefaults())
