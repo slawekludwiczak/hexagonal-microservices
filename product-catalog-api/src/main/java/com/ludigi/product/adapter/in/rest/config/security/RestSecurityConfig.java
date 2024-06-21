@@ -1,4 +1,4 @@
-package com.ludigi.product.adapter.in.rest.config;
+package com.ludigi.product.adapter.in.rest.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,14 +11,14 @@ import org.springframework.security.web.SecurityFilterChain;
 import static org.springframework.security.oauth2.core.authorization.OAuth2AuthorizationManagers.hasScope;
 
 @Configuration
-class RestSecurityConfig {
+public class RestSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/api/hello").access(hasScope("products.read"))
+                                .requestMatchers(HttpMethod.POST,"/api/products").access(hasScope("products.write"))
                                 .anyRequest().authenticated()
                 ).oauth2ResourceServer(
                         oauth2 -> oauth2.jwt(Customizer.withDefaults())

@@ -7,28 +7,28 @@ public class Product {
     private ProductId id;
     private String name;
     private String description;
-    private UUID addedBy;
+    private UserId addedBy;
 
-    private Product(ProductId id, String title, String description, UUID addedBy) {
+    private Product(ProductId id, String title, String description, UserId addedBy) {
         this.id = id;
         this.name = title;
         this.description = description;
         this.addedBy = addedBy;
     }
 
-    public static Product withoutId(String title, String description, UUID addedBy) {
+    public static Product withoutId(String title, String description, String addedBy) {
         return new Product(
                 new ProductId(UUID.randomUUID().toString()),
                 title,
                 description,
-                addedBy
+                new UserId(UUID.fromString(addedBy).toString())
         );
     }
 
     public static Product withId(ProductId productId,
                                  String title,
                                  String description,
-                                 UUID addedBy) {
+                                 UserId addedBy) {
         return new Product(productId, title, description, addedBy);
     }
 
@@ -42,6 +42,10 @@ public class Product {
 
     public String getDescription() {
         return description;
+    }
+
+    public UserId getAddedBy() {
+        return addedBy;
     }
 
     @Override

@@ -10,6 +10,7 @@ class ProductEntityMapper {
         entity.setId(UUID.fromString(product.getId().id()));
         entity.setName(product.getName());
         entity.setDescription(product.getDescription());
+        entity.setAddedBy(UUID.fromString(product.getAddedBy().id()));
         return entity;
     }
 }
