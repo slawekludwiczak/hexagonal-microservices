@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.spring.dependency.management)
 }
 
-extra["springCloudVersion"] = "2023.0.2"
+extra["springCloudVersion"] = libs.versions.spring.cloud
 
 dependencyManagement {
 	imports {

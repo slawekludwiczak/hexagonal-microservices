@@ -1,6 +1,7 @@
 [versions]
 spring-boot = "3.3.0"
 spring-dependency-management = "1.1.5"
+spring-cloud = "2023.0.2"
 junit = "5.10.2"
 mockito = "5.12.0"
 
