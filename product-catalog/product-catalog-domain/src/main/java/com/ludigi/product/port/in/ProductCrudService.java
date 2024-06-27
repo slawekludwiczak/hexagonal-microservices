@@ -13,6 +13,7 @@ public class ProductCrudService implements ProductCommandPort, ProductQueryPort 
         this.productPersistencePort = productPersistencePort;
     }
 
+    @Override
     public ProductId createProduct(CreateProductCommand createProductCommand) {
         Product product = Product.withoutId(
                 createProductCommand.name(),
