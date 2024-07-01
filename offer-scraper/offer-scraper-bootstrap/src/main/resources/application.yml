@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: offer-scraper
+  config:
+    import:
+      - classpath:persistence.yml
+      - classpath:api.yml
+logging:
+  level:
+    com:
+      ludigi:
+        priceflow:
+          offer: DEBUG

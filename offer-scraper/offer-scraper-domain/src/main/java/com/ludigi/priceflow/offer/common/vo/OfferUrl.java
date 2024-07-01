@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.offer.scraping;
+package com.ludigi.priceflow.offer.common.vo;
 
 import java.net.URI;
 

@@ -1,7 +1,7 @@
 package com.ludigi.priceflow.offer.scraping.port.in;
 
 import com.ludigi.priceflow.offer.scraping.ActiveOffer;
-import com.ludigi.priceflow.offer.scraping.Price;
+import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.scraping.port.out.OfferPersistencePort;
 
 import java.util.Optional;
@@ -17,6 +17,5 @@ public class FetchCurrentPriceUseCase {
     public void fetchCurrentPrice(UUID offerId) {
         ActiveOffer activeOffer = offerPersistencePort.findById(offerId).orElseThrow();
         Optional<Price> price = activeOffer.fetchCurrentPrice();
-
     }
 }

@@ -1,0 +1,12 @@
+POST http://{{host}}:{{port}}/api/offers
+Content-Type: application/json
+
+{
+  "offerUrl": "http://acme.com/offer/123",
+  "productId": "{{$random.uuid}}",
+  "selector": ".price",
+  "selectorType": "CSS",
+  "pageType": "HTML",
+  "refreshValue": 1,
+  "refreshUnit": "MINUTES"
+}

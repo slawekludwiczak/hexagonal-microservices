@@ -1,9 +1,9 @@
 package com.ludigi.priceflow.offer.scraping.extractor.jsoup;
 
-import com.ludigi.priceflow.offer.scraping.PriceSelector;
-import com.ludigi.priceflow.offer.scraping.SelectorType;
-import com.ludigi.priceflow.offer.scraping.Currency;
-import com.ludigi.priceflow.offer.scraping.Price;
+import com.ludigi.priceflow.offer.common.vo.PriceSelector;
+import com.ludigi.priceflow.offer.common.vo.SelectorType;
+import com.ludigi.priceflow.offer.common.vo.Currency;
+import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
