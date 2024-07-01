@@ -9,7 +9,3 @@ spring:
           import_files_sql_extractor: org.hibernate.tool.schema.internal.script.MultiLineSqlScriptExtractor
   datasource:
     url: jdbc:h2:mem:test
-logging:
-  level:
-    sql: debug
-    org.hibernate.orm.jdbc.bind: trace
