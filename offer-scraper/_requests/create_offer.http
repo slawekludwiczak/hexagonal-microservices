@@ -8,5 +8,36 @@ Content-Type: application/json
   "selectorType": "CSS",
   "pageType": "HTML",
   "refreshValue": 1,
+  "refreshUnit": "SECONDS"
+}
+
+### otodom
+
+POST http://{{host}}:{{port}}/api/offers
+Content-Type: application/json
+
+{
+  "offerUrl": "https://www.otodom.pl/pl/oferta/tarnogaj-i-4-pokoje-i-tranwaj-i-park-ID4rhc8",
+  "productId": "{{$random.uuid}}",
+  "selector": "strong[aria-label=Cena]",
+  "selectorType": "CSS",
+  "pageType": "HTML",
+  "refreshValue": 5,
+  "refreshUnit": "MINUTES"
+}
+
+### olx
+
+POST http://{{host}}:{{port}}/api/offers
+Content-Type: application/json
+Authorization: Bearer {{$auth.token("keycloak-config")}}
+
+{
+  "offerUrl": "https://www.olx.pl/d/oferta/biurko-ikea-alex-CID628-ID10OyB2.html",
+  "productId": "{{$random.uuid}}",
+  "selector": "div[data-testid=ad-price-container] > h3",
+  "selectorType": "CSS",
+  "pageType": "HTML",
+  "refreshValue": 5,
   "refreshUnit": "MINUTES"
 }

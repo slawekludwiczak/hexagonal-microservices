@@ -1,18 +1,12 @@
+apply(from = rootProject.file("buildSrc/shared.gradle.kts"))
+
 plugins {
     id("java")
 }
 
-group = "com.ludigi"
-version = "1.0-SNAPSHOT"
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     implementation(libs.jsoup)
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
-    testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation(libs.junit.jupiter)
 }
 
 tasks.test {

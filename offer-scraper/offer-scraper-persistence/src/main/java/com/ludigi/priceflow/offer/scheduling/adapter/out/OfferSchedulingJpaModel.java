@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.offer.scheduling.adapter.out.model;
+package com.ludigi.priceflow.offer.scheduling.adapter.out;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -10,9 +10,10 @@ import java.util.UUID;
 
 @Entity
 @Table(name = "offers")
-public class OfferSchedulingJpaModel {
+class OfferSchedulingJpaModel {
     @Id
     private UUID id;
+    private String url;
     private Duration refreshInterval;
     private LocalDateTime scheduledAt;
 
@@ -22,6 +23,14 @@ public class OfferSchedulingJpaModel {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Duration getRefreshInterval() {

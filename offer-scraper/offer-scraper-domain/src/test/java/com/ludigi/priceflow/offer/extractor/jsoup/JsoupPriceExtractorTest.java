@@ -19,25 +19,25 @@ class JsoupPriceExtractorTest {
     class WithoutCurrency {
         @Test
         void shouldExtractPriceWithDotSeparator() {
-            verifyPrice("15.5", new Price(15.5, Currency.NONE, null));
-            verifyPrice("15.54", new Price(15.54, Currency.NONE, null));
+            verifyPrice("15.5", new Price(15.5, Currency.NONE));
+            verifyPrice("15.54", new Price(15.54, Currency.NONE));
         }
 
         @Test
         void shouldExtractPriceWithCommaSeparator() {
-            verifyPrice("15,5", new Price(15.5, Currency.NONE, null));
-            verifyPrice("15,54", new Price(15.54, Currency.NONE, null));
+            verifyPrice("15,5", new Price(15.5, Currency.NONE));
+            verifyPrice("15,54", new Price(15.54, Currency.NONE));
         }
 
         @Test
         void shouldExtractPriceWithSpaceSeparator() {
-            verifyPrice("15 5", new Price(155, Currency.NONE, null));
-            verifyPrice("15 54", new Price(1554, Currency.NONE, null));
+            verifyPrice("15 5", new Price(155, Currency.NONE));
+            verifyPrice("15 54", new Price(1554, Currency.NONE));
         }
 
         @Test
         void shouldExtractIntegerPrice() {
-            verifyPrice("15", new Price(15, Currency.NONE, null));
+            verifyPrice("15", new Price(15, Currency.NONE));
         }
 
         private void verifyPrice(String htmlPrice, Price expectedPrice) {
@@ -57,7 +57,6 @@ class JsoupPriceExtractorTest {
             Price returnedPrice = price.get();
             assertEquals(expectedPrice.value(), returnedPrice.value());
             assertEquals(expectedPrice.currency(), returnedPrice.currency());
-            assertNotNull(returnedPrice.time());
         }
     }
 

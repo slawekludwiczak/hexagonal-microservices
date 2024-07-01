@@ -1,10 +1,12 @@
 spring:
   application:
-    name: offer-scraper
+    name: priceflow-offer-scraper
   config:
     import:
       - classpath:persistence.yml
       - classpath:api.yml
+      - classpath:events.yml
+      - classpath:discovery.yml
 logging:
   level:
     com:

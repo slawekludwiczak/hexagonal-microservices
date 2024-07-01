@@ -1,3 +1,5 @@
+apply(from = rootProject.file("buildSrc/shared.gradle.kts"))
+
 plugins {
     id("java")
     alias(libs.plugins.spring.boot) apply false
@@ -10,10 +12,8 @@ dependencies {
     implementation (libs.spring.boot.starter.web)
     implementation (libs.spring.boot.starter.actuator)
     implementation (libs.spring.boot.devtools)
+    implementation (libs.spring.boot.starter.oauth2.resource.server)
 }
-
-group = "com.ludigi"
-version = "0.0.1-SNAPSHOT"
 
 java {
     toolchain {
@@ -21,6 +21,3 @@ java {
     }
 }
 
-repositories {
-    mavenCentral()
-}

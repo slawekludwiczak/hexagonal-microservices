@@ -1,3 +1,5 @@
+apply(from = rootProject.file("buildSrc/shared.gradle.kts"))
+
 plugins {
     id("java")
     alias(libs.plugins.spring.boot) apply false
@@ -13,15 +15,8 @@ dependencies {
     implementation (libs.h2)
 }
 
-group = "com.ludigi"
-version = "0.0.1-SNAPSHOT"
-
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
-}
-
-repositories {
-    mavenCentral()
 }

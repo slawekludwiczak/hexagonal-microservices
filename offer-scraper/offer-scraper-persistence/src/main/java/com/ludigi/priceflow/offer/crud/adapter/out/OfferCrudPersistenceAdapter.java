@@ -1,14 +1,13 @@
 package com.ludigi.priceflow.offer.crud.adapter.out;
 
 import com.ludigi.priceflow.offer.crud.Offer;
-import com.ludigi.priceflow.offer.crud.adapter.out.model.OfferCrudJpaModel;
 import com.ludigi.priceflow.offer.crud.port.out.OfferCrudPersistencePort;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
-public class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
+class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
     private final OfferCrudJpaRepository offerCrudJpaRepository;
 
     public OfferCrudPersistenceAdapter(OfferCrudJpaRepository offerCrudJpaRepository) {

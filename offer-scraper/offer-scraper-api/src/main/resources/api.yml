@@ -1,4 +1,13 @@
-management:
-  endpoint:
-    health:
-      enabled: true
+spring:
+  management:
+    endpoint:
+      health:
+        enabled: true
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jws-algorithms: RS256 #default
+          issuer-uri: http://keycloak:8080/realms/spring-realm
+server:
+  port: 8081

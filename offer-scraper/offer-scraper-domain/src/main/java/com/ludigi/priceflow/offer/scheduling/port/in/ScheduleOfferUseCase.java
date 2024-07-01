@@ -1,5 +1,7 @@
 package com.ludigi.priceflow.offer.scheduling.port.in;
 
+import com.ludigi.priceflow.offer.common.events.EventPublisher;
+import com.ludigi.priceflow.offer.common.events.OfferScheduledEvent;
 import com.ludigi.priceflow.offer.scheduling.UnscheduledOffer;
 import com.ludigi.priceflow.offer.scheduling.port.out.OfferSchedulingPersistencePort;
 
@@ -7,16 +9,24 @@ import java.util.List;
 
 public class ScheduleOfferUseCase {
     private static final int DEFAULT_POOL_SIZE = 10;
-    private final OfferSchedulingPersistencePort offerSchedulingRepository;
+    private final OfferSchedulingPersistencePort offerSchedulingPersistencePort;
+    private final EventPublisher eventPublisher;
 
-    public ScheduleOfferUseCase(OfferSchedulingPersistencePort scheduledOfferRepository) {
-        this.offerSchedulingRepository = scheduledOfferRepository;
+    public ScheduleOfferUseCase(OfferSchedulingPersistencePort offerSchedulingPersistencePort, EventPublisher eventPublisher) {
+        this.offerSchedulingPersistencePort = offerSchedulingPersistencePort;
+        this.eventPublisher = eventPublisher;
     }
 
     public void scheduleOffers() {
-        List<UnscheduledOffer> unscheduledOffers = offerSchedulingRepository.findUnscheduledOffers(DEFAULT_POOL_SIZE);
+        List<UnscheduledOffer> unscheduledOffers = offerSchedulingPersistencePort.findUnscheduledOffers(DEFAULT_POOL_SIZE);
         unscheduledOffers.stream()
                 .map(UnscheduledOffer::schedule)
-                .forEach(offerSchedulingRepository::save);
+                .forEach(scheduledOffer -> {
+                    offerSchedulingPersistencePort.save(scheduledOffer);
+                    eventPublisher.publish(
+                            new OfferScheduledEvent(scheduledOffer.getId(), scheduledOffer.getUrl().url())
+                    );
+                });
     }
+
 }

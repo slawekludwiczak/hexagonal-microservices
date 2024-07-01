@@ -26,7 +26,7 @@ public class JsoupPriceExtractor implements PriceExtractor {
         return elements.stream()
                 .findFirst()
                 .map(e -> parseDouble(e.text()))
-                .map(price -> new Price(price, Currency.NONE, LocalDateTime.now()));
+                .map(price -> new Price(price, Currency.NONE));
     }
 
     private boolean supports(PriceSelector selector) {

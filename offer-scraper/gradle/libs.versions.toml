@@ -3,7 +3,7 @@ junit = "5.10.2"
 jsoup = "1.17.2"
 spring-boot = "3.3.0"
 spring-dependency-management = "1.1.5"
-#spring-cloud = "2023.0.2"
+spring-cloud = "2023.0.2"
 #mockito = "5.12.0"
 
 [libraries]
@@ -12,12 +12,13 @@ spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" 
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-amqp = { module = "org.springframework.boot:spring-boot-starter-amqp" }
 #spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-#spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
-#spring-security-test = { module = "org.springframework.security:spring-security-test" }
+spring-boot-starter-oauth2-resource-server = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+spring-security-test = { module = "org.springframework.security:spring-security-test" }
 spring-boot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
-#junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
-#junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 #mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 #mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 h2 = { module = "com.h2database:h2" }
@@ -25,6 +26,3 @@ h2 = { module = "com.h2database:h2" }
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management" }
-#
-#[bundles]
-#mockito = ["mockito-core", "mockito-junit-jupiter"]

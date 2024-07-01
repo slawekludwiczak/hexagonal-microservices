@@ -1,0 +1,5 @@
+#spring:
+#  rabbitmq:
+#    listener:
+#      simple:
+#        concurrency: 10
