@@ -8,6 +8,6 @@ spring:
       resourceserver:
         jwt:
           jws-algorithms: RS256 #default
-          issuer-uri: http://keycloak:8080/realms/spring-realm
+          issuer-uri: http://keycloak:8080/realms/priceflow
 server:
   port: 8081

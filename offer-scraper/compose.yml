@@ -5,6 +5,11 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 5s
+      timeout: 5s
+      retries: 3
   consul:
     image: hashicorp/consul:1.19
     container_name: consul
@@ -25,7 +30,7 @@ services:
       - start-dev
       - --import-realm
     volumes:
-      - ../keycloak/spring-realm.json:/opt/keycloak/data/import/spring-realm.json
+      - ../keycloak/priceflow-realm.json:/opt/keycloak/data/import/spring-realm.json
       - ../keycloak/HealthCheck.java:/opt/HealthCheck.java:ro
     healthcheck:
       test: [ "CMD", "java", "/opt/HealthCheck.java", "http://localhost:9000/health/live", "||", "exit", "1" ]
