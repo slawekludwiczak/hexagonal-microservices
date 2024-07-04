@@ -42,5 +42,16 @@ public class GetPriceHistoryWebAdapter {
         return ResponseEntity.ok(new PriceHistoryResponse(priceHistory));
     }
 
+    //TODO remove
+    @GetMapping("/api/offers/mock/prices-authenticated")
+    ResponseEntity<?> getPriceHistoryByOfferMockAuth(@CurrentSecurityContext(expression = "authentication.principal") Jwt jwt) {
+        List<OfferPrice> priceHistory = List.of(
+                new OfferPrice(new Price(12.345, Currency.PLN), LocalDateTime.now()),
+                new OfferPrice(new Price(23.456, Currency.PLN), LocalDateTime.now()),
+                new OfferPrice(new Price(34.567, Currency.PLN), LocalDateTime.now())
+        );
+        return ResponseEntity.ok(new PriceHistoryResponse(priceHistory));
+    }
+
     private record PriceHistoryResponse(List<OfferPrice> prices) {}
 }

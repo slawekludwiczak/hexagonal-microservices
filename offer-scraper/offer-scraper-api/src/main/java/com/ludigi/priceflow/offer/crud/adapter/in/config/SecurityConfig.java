@@ -26,6 +26,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers(HttpMethod.POST,"/api/offers").authenticated()
+                                .requestMatchers(HttpMethod.GET,"/api/offers/mock/prices").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/offers/mock/prices-authenticated").authenticated()
                                 .requestMatchers(HttpMethod.GET,"/api/offers/{id}/prices").authenticated()
                                 .requestMatchers(HttpMethod.GET,"/actuator/health").permitAll()
                                 .requestMatchers(PathRequest.toH2Console()).permitAll()
