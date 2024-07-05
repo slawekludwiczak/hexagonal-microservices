@@ -1,6 +1,6 @@
 package com.ludigi.priceflow.offer.scraping.extractor.jsoup;
 
-import com.ludigi.priceflow.offer.common.vo.PriceSelector;
+import com.ludigi.priceflow.offer.common.vo.Selector;
 import com.ludigi.priceflow.offer.common.vo.SelectorType;
 import com.ludigi.priceflow.offer.common.vo.Currency;
 import com.ludigi.priceflow.offer.common.vo.Price;
@@ -11,12 +11,11 @@ import org.jsoup.select.Elements;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class JsoupPriceExtractor implements PriceExtractor {
     @Override
-    public Optional<Price> extractPrice(String html, PriceSelector selector) {
+    public Optional<Price> extractPrice(String html, Selector selector) {
         if (!supports(selector)) {
             throw new IllegalArgumentException("Selector type %s is unsupported".formatted(selector.type()));
         }
@@ -29,7 +28,7 @@ public class JsoupPriceExtractor implements PriceExtractor {
                 .map(price -> new Price(price, Currency.NONE));
     }
 
-    private boolean supports(PriceSelector selector) {
+    private boolean supports(Selector selector) {
         return selector.type() == SelectorType.CSS;
     }
 

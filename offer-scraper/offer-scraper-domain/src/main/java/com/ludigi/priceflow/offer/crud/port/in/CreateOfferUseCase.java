@@ -19,7 +19,7 @@ public class CreateOfferUseCase {
                 UUID.randomUUID(),
                 new ProductId(command.productId),
                 new OfferUrl(command.offerUrl()),
-                new PriceSelector(command.selector(), SelectorType.valueOf(command.selectorType())),
+                new Selector(command.selector(), SelectorType.valueOf(command.selectorType())),
                 PageType.valueOf(command.pageType),
                 new RefreshPeriod(command.refreshValue, ChronoUnit.valueOf(command.refreshUnit))
         );

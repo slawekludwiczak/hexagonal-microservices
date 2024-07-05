@@ -1,6 +1,6 @@
 package com.ludigi.priceflow.offer.extractor.jsoup;
 
-import com.ludigi.priceflow.offer.common.vo.PriceSelector;
+import com.ludigi.priceflow.offer.common.vo.Selector;
 import com.ludigi.priceflow.offer.common.vo.SelectorType;
 import com.ludigi.priceflow.offer.common.vo.Currency;
 import com.ludigi.priceflow.offer.common.vo.Price;
@@ -51,12 +51,29 @@ class JsoupPriceExtractorTest {
             String htmlWithPrice = html.formatted(htmlPrice);
             Optional<Price> price = jsoupPriceExtractor.extractPrice(
                     htmlWithPrice,
-                    new PriceSelector("p.price", SelectorType.CSS)
+                    new Selector("p.price", SelectorType.CSS)
             );
             assertFalse(price.isEmpty());
             Price returnedPrice = price.get();
             assertEquals(expectedPrice.value(), returnedPrice.value());
             assertEquals(expectedPrice.currency(), returnedPrice.currency());
+        }
+    }
+
+    @Nested
+    class InvalidSelector {
+        private final String html = """
+                    <html>
+                        <body>
+                            <p class="price">123,45zł</p>
+                        </body>
+                    </html>
+                    """;
+
+        @Test
+        void shouldNotFindPriceForInvalidSelector() {
+            Optional<Price> price = jsoupPriceExtractor.extractPrice(html, new Selector("p.value", SelectorType.CSS));
+            assertTrue(price.isEmpty());
         }
     }
 
