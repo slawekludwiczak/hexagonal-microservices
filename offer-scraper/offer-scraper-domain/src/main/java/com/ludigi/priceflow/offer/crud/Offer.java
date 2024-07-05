@@ -8,14 +8,14 @@ public class Offer {
     private UUID id;
     private ProductId productId;
     private OfferUrl url;
-    private PriceSelector selector;
+    private Selector selector;
     private PageType pageType;
     private RefreshPeriod refreshPeriod;
 
     public Offer(UUID id,
                  ProductId productId,
                  OfferUrl url,
-                 PriceSelector selector,
+                 Selector selector,
                  PageType pageType,
                  RefreshPeriod refreshPeriod) {
         this.id = id;
@@ -38,7 +38,7 @@ public class Offer {
         return url;
     }
 
-    public PriceSelector getSelector() {
+    public Selector getSelector() {
         return selector;
     }
 
