@@ -1,14 +1,6 @@
 package com.ludigi;
 
-import com.ludigi.priceflow.offer.common.vo.Price;
-import com.ludigi.priceflow.offer.common.vo.PriceSelector;
-import com.ludigi.priceflow.offer.common.vo.SelectorType;
-import com.ludigi.priceflow.offer.scraping.extractor.jsoup.JsoupPriceExtractor;
-import com.ludigi.priceflow.offer.scraping.scraper.jsoup.JsoupScraper;
-
 import java.text.ParseException;
-import java.time.Duration;
-import java.util.Optional;
 
 public class Main {
     public static void main(String[] args) throws ParseException {

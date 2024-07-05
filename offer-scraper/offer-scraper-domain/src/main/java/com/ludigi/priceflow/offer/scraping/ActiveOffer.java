@@ -3,7 +3,7 @@ package com.ludigi.priceflow.offer.scraping;
 import com.ludigi.priceflow.offer.common.vo.OfferUrl;
 import com.ludigi.priceflow.offer.common.vo.PageType;
 import com.ludigi.priceflow.offer.common.vo.Price;
-import com.ludigi.priceflow.offer.common.vo.PriceSelector;
+import com.ludigi.priceflow.offer.common.vo.Selector;
 import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
 import com.ludigi.priceflow.offer.scraping.extractor.jsoup.JsoupPriceExtractor;
 
@@ -13,10 +13,10 @@ import java.util.UUID;
 public class ActiveOffer {
     private UUID id;
     private OfferUrl url;
-    private PriceSelector selector;
+    private Selector selector;
     private PageType pageType;
 
-    public ActiveOffer(UUID id, OfferUrl url, PriceSelector selector, PageType pageType) {
+    public ActiveOffer(UUID id, OfferUrl url, Selector selector, PageType pageType) {
         this.id = id;
         this.url = url;
         this.selector = selector;
@@ -37,7 +37,7 @@ public class ActiveOffer {
         return url;
     }
 
-    public PriceSelector getSelector() {
+    public Selector getSelector() {
         return selector;
     }
 
