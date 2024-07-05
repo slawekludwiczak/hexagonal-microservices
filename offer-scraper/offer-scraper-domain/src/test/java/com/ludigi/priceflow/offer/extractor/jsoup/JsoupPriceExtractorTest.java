@@ -60,4 +60,21 @@ class JsoupPriceExtractorTest {
         }
     }
 
+    @Nested
+    class InvalidSelector {
+        private final String html = """
+                    <html>
+                        <body>
+                            <p class="price">123,45zł</p>
+                        </body>
+                    </html>
+                    """;
+
+        @Test
+        void shouldNotFindPriceForInvalidSelector() {
+            Optional<Price> price = jsoupPriceExtractor.extractPrice(html, new PriceSelector("p.value", SelectorType.CSS));
+            assertTrue(price.isEmpty());
+        }
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.ludigi.priceflow.offer.scraping.scraper.jsoup;
 
 import com.ludigi.priceflow.offer.scraping.scraper.Scraper;
+import com.ludigi.priceflow.offer.scraping.scraper.exception.ScraperException;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
@@ -12,7 +13,7 @@ public class JsoupScraper implements Scraper {
         try {
             return Jsoup.connect(url).get().html();
         } catch (IOException e) {
-            throw new UncheckedIOException(e);
+            throw new ScraperException(e);
         }
     }
 }

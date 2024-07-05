@@ -11,7 +11,6 @@ import org.jsoup.select.Elements;
 
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class JsoupPriceExtractor implements PriceExtractor {
