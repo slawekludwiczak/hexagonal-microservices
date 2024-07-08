@@ -11,6 +11,7 @@
           </option>
           <option name="goals">
             <list>
+              <option value="frontend:install-node-and-npm" />
               <option value="frontend:npm@npm-install" />
               <option value="frontend:npm@npm-build-dev" />
             </list>

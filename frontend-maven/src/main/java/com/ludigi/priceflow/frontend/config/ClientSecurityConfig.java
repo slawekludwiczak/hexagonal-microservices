@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.frontend;
+package com.ludigi.priceflow.frontend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

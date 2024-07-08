@@ -22,3 +22,11 @@ spring:
     cache: false
 server:
   port: 8083
+logging:
+  level:
+    com:
+      ludigi:
+        priceflow:
+          frontend:
+            products: DEBUG
+

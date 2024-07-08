@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.frontend;
+package com.ludigi.priceflow.frontend.home;
 
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -19,8 +19,8 @@ public class HomeController {
     @GetMapping(value = "/", produces = MediaType.TEXT_HTML_VALUE)
     String home(@RegisteredOAuth2AuthorizedClient("keycloak") OAuth2AuthorizedClient authorizedClient,
                 Model model) {
-        String prices = restTemplate.getForObject("http://priceflow-offer-scraper/api/offers/mock/prices-authenticated", String.class);
-        model.addAttribute("prices", prices);
+//        String prices = restTemplate.getForObject("http://priceflow-offer-scraper/api/offers/mock/prices-authenticated", String.class);
+//        model.addAttribute("prices", prices);
         return "index";
     }
 }
