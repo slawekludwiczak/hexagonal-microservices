@@ -4,6 +4,7 @@ import com.ludigi.product.Product;
 import com.ludigi.product.ProductId;
 import com.ludigi.product.port.out.ProductPersistencePort;
 
+import java.util.List;
 import java.util.Optional;
 
 public class ProductCrudService implements ProductCommandPort, ProductQueryPort {
@@ -27,5 +28,10 @@ public class ProductCrudService implements ProductCommandPort, ProductQueryPort 
     @Override
     public Optional<Product> findById(String id) {
         return productPersistencePort.findById(id);
+    }
+
+    @Override
+    public List<Product> findAllProducts() {
+        return productPersistencePort.findAll();
     }
 }

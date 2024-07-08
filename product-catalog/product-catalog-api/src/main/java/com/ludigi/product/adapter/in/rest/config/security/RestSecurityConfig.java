@@ -18,8 +18,8 @@ public class RestSecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.POST,"/api/products").access(hasScope("products.write"))
-                                .requestMatchers(HttpMethod.POST,"/api/products/{id}").access(hasScope("products.read"))
+                                .requestMatchers(HttpMethod.GET,"/api/products").permitAll()
+                                .requestMatchers(HttpMethod.POST,"/api/products/{id}").authenticated()
                                 .requestMatchers(HttpMethod.GET,"/actuator/health").permitAll()
                                 .anyRequest().authenticated()
                 ).oauth2ResourceServer(

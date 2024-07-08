@@ -3,6 +3,7 @@ package com.ludigi.product.adapter.out;
 import com.ludigi.product.Product;
 import com.ludigi.product.port.out.ProductPersistencePort;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,5 +23,13 @@ public class JpaProductPersistenceAdapter implements ProductPersistencePort {
     public Optional<Product> findById(String id) {
         return productEntityRepository.findById(UUID.fromString(id))
                 .map(ProductEntityMapper::to);
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return productEntityRepository.findAll()
+                .stream()
+                .map(ProductEntityMapper::to)
+                .toList();
     }
 }

@@ -4,9 +4,7 @@ import com.ludigi.product.Product;
 import com.ludigi.product.ProductId;
 import com.ludigi.product.port.out.ProductPersistencePort;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class InMemoryProductPersistenceAdapter implements ProductPersistencePort {
     private final Map<ProductId, Product> products = new HashMap<>();
@@ -19,5 +17,10 @@ public class InMemoryProductPersistenceAdapter implements ProductPersistencePort
     @Override
     public Optional<Product> findById(String id) {
         return Optional.ofNullable(products.get(new ProductId(id)));
+    }
+
+    @Override
+    public List<Product> findAll() {
+        return new ArrayList<>(products.values());
     }
 }

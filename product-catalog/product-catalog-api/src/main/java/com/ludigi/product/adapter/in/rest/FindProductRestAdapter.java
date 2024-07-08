@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 class FindProductRestAdapter {
     private final ProductQueryPort productQueryPort;
@@ -21,6 +23,15 @@ class FindProductRestAdapter {
                 .map(ProductResponse::new)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/api/products")
+    ResponseEntity<List<ProductResponse>> findAllProducts() {
+        List<ProductResponse> products = productQueryPort.findAllProducts()
+                .stream()
+                .map(ProductResponse::new)
+                .toList();
+        return ResponseEntity.ok(products);
     }
 
     record ProductResponse(String id, String name, String description, String addedBy) {
