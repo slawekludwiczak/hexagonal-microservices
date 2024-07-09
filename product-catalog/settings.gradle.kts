@@ -1,4 +1,4 @@
-rootProject.name = "priceflow"
+rootProject.name = "product-catalog"
 include("product-catalog-domain")
 include("product-catalog-api")
 include("product-catalog-persistence")
