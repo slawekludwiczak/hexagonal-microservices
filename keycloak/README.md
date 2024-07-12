@@ -4,4 +4,6 @@ To use keycloak first set keycloak in your hosts file (/private/etc/hosts for Ma
 ```
 
 Test users:
-user1 : pass
+admin : admin
+user1 : pass1
+user2 : pass2
