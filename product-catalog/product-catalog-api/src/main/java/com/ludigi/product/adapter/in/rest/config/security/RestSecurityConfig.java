@@ -8,8 +8,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.oauth2.core.authorization.OAuth2AuthorizationManagers.hasScope;
-
 @Configuration
 public class RestSecurityConfig {
 
@@ -18,7 +16,7 @@ public class RestSecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers(HttpMethod.GET,"/api/products").permitAll()
+                                .requestMatchers(HttpMethod.GET,"/api/products").authenticated()
                                 .requestMatchers(HttpMethod.POST,"/api/products/{id}").authenticated()
                                 .requestMatchers(HttpMethod.GET,"/actuator/health").permitAll()
                                 .anyRequest().authenticated()

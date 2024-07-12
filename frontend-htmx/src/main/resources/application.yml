@@ -29,4 +29,3 @@ logging:
         priceflow:
           frontend:
             products: DEBUG
-
