@@ -1,8 +1,11 @@
 package com.ludigi.product;
 
-import com.ludigi.product.port.in.ProductCommandPort;
-import com.ludigi.product.port.in.ProductCrudService;
-import com.ludigi.product.port.out.ProductPersistencePort;
+import com.ludigi.priceflow.product.Product;
+import com.ludigi.priceflow.product.ProductId;
+import com.ludigi.priceflow.product.UserId;
+import com.ludigi.priceflow.product.port.in.ProductCommandPort;
+import com.ludigi.priceflow.product.port.in.ProductCrudService;
+import com.ludigi.priceflow.product.port.out.ProductPersistencePort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;

@@ -1,8 +1,10 @@
 package com.ludigi.product.adapter.out;
 
-import com.ludigi.product.Product;
-import com.ludigi.product.ProductId;
-import com.ludigi.product.UserId;
+import com.ludigi.priceflow.product.Product;
+import com.ludigi.priceflow.product.ProductId;
+import com.ludigi.priceflow.product.UserId;
+import com.ludigi.priceflow.product.adapter.out.ProductEntity;
+import com.ludigi.priceflow.product.adapter.out.ProductEntityMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;

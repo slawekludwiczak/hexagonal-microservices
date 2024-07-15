@@ -1,16 +1,15 @@
 package com.ludigi.product.adapter.in.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ludigi.product.Product;
-import com.ludigi.product.ProductId;
-import com.ludigi.product.UserId;
-import com.ludigi.product.port.in.ProductQueryPort;
+import com.ludigi.priceflow.product.Product;
+import com.ludigi.priceflow.product.ProductId;
+import com.ludigi.priceflow.product.UserId;
+import com.ludigi.priceflow.product.adapter.in.rest.FindProductRestAdapter;
+import com.ludigi.priceflow.product.port.in.ProductQueryPort;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.test.context.ActiveProfiles;

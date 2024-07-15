@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":product-catalog-api"))
     implementation(project(":product-catalog-persistence"))
     implementation(project(":product-catalog-consul"))
+    implementation(project(":product-catalog-events"))
     implementation (libs.spring.boot.starter)
     testImplementation (libs.spring.boot.starter.test)
     testRuntimeOnly(libs.junit.platform.launcher)

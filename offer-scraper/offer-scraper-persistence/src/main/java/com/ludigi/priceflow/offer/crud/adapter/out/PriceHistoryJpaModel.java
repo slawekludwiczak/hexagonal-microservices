@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
-@Table(name = "offer_price")
+@Table(name = "offers_price")
 class PriceHistoryJpaModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

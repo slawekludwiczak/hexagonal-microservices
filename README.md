@@ -7,6 +7,7 @@ configure your hosts file with additional mappings:
 ```
 127.0.0.1   keycloak
 127.0.0.1   consul
+127.0.0.1   rabbitmq
 ```
 
 ![application](docs/application.png)

@@ -10,6 +10,7 @@ dependencies {
     implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(project(":product-catalog-domain"))
     implementation(libs.spring.boot.starter.data.jpa)
+    implementation (libs.spring.boot.devtools)
     implementation(libs.h2)
     testImplementation(libs.spring.boot.starter.test)
 }
