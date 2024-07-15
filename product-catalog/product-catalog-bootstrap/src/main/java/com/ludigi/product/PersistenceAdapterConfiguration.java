@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class PersistenceAdapterConfiguration {
 
     @Bean
-    public ProductCommandPort createProductPort(ProductPersistencePort productPersistencePort) {
+    public ProductCrudService createProductPort(ProductPersistencePort productPersistencePort) {
         return new ProductCrudService(productPersistencePort);
     }
 

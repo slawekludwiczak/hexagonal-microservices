@@ -18,8 +18,9 @@ spring:
           kc-provider:
             issuer-uri: http://keycloak:8080/realms/priceflow
             user-name-attribute: email
-  thymeleaf:
-    cache: false
+  cloud:
+    consul:
+      host: consul
 server:
   port: 8083
 logging:

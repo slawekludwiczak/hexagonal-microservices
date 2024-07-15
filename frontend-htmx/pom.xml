@@ -8,10 +8,10 @@
         <version>3.3.1</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <name>priceflow-frontend</name>
     <groupId>com.ludigi.priceflow</groupId>
-    <artifactId>frontend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>frontend-maven</name>
+    <artifactId>priceflow-frontend</artifactId>
+    <version>latest</version>
     <description>frontend-maven</description>
     <url/>
     <licenses>
@@ -109,7 +109,7 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <phase>process-resources</phase>
+                        <phase>none</phase>
                         <configuration>
                             <arguments>install</arguments>
                         </configuration>
@@ -120,7 +120,7 @@
                             <goal>npm</goal>
                         </goals>
                         <phase>
-                            process-resources
+                            none
                         </phase>
                         <configuration>
                             <arguments>install</arguments>
