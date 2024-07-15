@@ -24,7 +24,7 @@ public class FetchCurrentPriceUseCase {
         Optional<Price> price = activeOffer.fetchCurrentPrice();
         price.map(p -> new PricePoint(activeOffer.getId(), p, LocalDateTime.now())).ifPresentOrElse(
                 pricePointPersistencePort::save,
-                () -> System.out.printf("Price for offer %s not found", activeOffer.getId())
+                () -> System.out.printf("Price for offer %s not found\n", activeOffer.getId())
 
         );
         System.out.printf("Fetched price %s for offer %s%n", price, activeOffer.getUrl().url());

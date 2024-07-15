@@ -1,5 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="FrontendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateResources" />
     <module name="frontend" />
     <option name="SPRING_BOOT_MAIN_CLASS" value="com.ludigi.priceflow.frontend.FrontendApplication" />
     <extension name="coverage">

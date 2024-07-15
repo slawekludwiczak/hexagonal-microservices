@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
-@FeignClient(value = "priceflow-product-catalog", configuration = {FeignConfiguration.class, FeignErrorDecoder.class})
+@FeignClient(value = "priceflow-product-catalog", configuration = {FeignConfiguration.class})
 public interface ProductRestClient {
     @GetMapping("/api/products")
     List<ProductResponse> findAll();

@@ -42,11 +42,17 @@ public class FeignClientInterceptor implements RequestInterceptor {
                         .withAuthorizedClient(authorizedClient)
                         .principal(authentication)
                         .build();
+
                 OAuth2AuthorizedClient refreshedClient = authorizedClientManager.authorize(authorizeRequest);
                 accessToken = refreshedClient.getAccessToken();
                 System.out.println(refreshedClient.getAccessToken());
             }
             requestTemplate.header("Authorization", String.format("Bearer %s", accessToken.getTokenValue()));
+        } else {
+            OAuth2AuthorizeRequest authorizeRequest = OAuth2AuthorizeRequest.withClientRegistrationId(CLIENT_REGISTRATION_ID).principal(authentication).build();
+            OAuth2AuthorizedClient refreshedClient = authorizedClientManager.authorize(authorizeRequest);
+            OAuth2AccessToken accessToken = refreshedClient.getAccessToken();
+            System.out.println(refreshedClient.getAccessToken());
         }
     }
 }

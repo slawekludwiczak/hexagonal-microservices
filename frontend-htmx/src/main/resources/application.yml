@@ -29,3 +29,6 @@ logging:
         priceflow:
           frontend:
             products: DEBUG
+    org:
+      springframework:
+        security: DEBUG

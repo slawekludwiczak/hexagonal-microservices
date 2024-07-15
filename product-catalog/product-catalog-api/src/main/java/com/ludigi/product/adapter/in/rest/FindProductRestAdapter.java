@@ -3,6 +3,8 @@ package com.ludigi.product.adapter.in.rest;
 import com.ludigi.product.Product;
 import com.ludigi.product.port.in.ProductQueryPort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,7 +28,7 @@ class FindProductRestAdapter {
     }
 
     @GetMapping("/api/products")
-    ResponseEntity<List<ProductResponse>> findAllProducts() {
+    ResponseEntity<List<ProductResponse>> findAllProducts(@CurrentSecurityContext(expression = "authentication.principal") Jwt jwt) {
         List<ProductResponse> products = productQueryPort.findAllProducts()
                 .stream()
                 .map(ProductResponse::new)

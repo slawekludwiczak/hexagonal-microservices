@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run app &amp; Tailwind Watch" type="CompoundRunConfigurationType">
+  <configuration default="false" name="Run Frontend &amp; Tailwind Watch" type="CompoundRunConfigurationType">
     <toRun name="npm-install-tailwind-watch" type="MavenRunConfiguration" />
     <toRun name="FrontendApplication" type="SpringBootApplicationConfigurationType" />
     <method v="2" />

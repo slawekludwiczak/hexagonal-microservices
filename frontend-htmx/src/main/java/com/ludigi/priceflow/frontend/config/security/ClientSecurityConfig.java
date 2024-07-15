@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.frontend.config;
+package com.ludigi.priceflow.frontend.config.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +13,8 @@ public class ClientSecurityConfig {
         http.authorizeHttpRequests(
                         requests -> requests
                                 .requestMatchers("/").authenticated()
+                                .requestMatchers("/products").authenticated()
+                                .requestMatchers("/offers").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .oauth2Login(Customizer.withDefaults());
