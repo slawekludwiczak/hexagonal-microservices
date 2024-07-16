@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.temporal.ChronoUnit;
-import java.util.List;
 
 @Controller
 @RequestMapping("/offers")
