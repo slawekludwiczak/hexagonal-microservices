@@ -20,7 +20,6 @@ public class OffersController {
 
     @GetMapping("")
     String getOffers() {
-        OfferRestClient.PriceHistoryResponse offerPrices = offerRestClient.findAllMock();
         return "offers/offers";
     }
 
