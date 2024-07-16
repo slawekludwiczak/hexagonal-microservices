@@ -11,7 +11,7 @@ spring:
             clientSecret: hzRoxXRoyT3J6jwgOsq3rYjiAlFHCXXP
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_basic
-            redirect-uri: "http://localhost:8083/login/oauth2/code/{registrationId}"
+            redirect-uri: "http://localhost:8081/login/oauth2/code/{registrationId}"
             scope:
               - "openid"
         provider:
@@ -22,7 +22,7 @@ spring:
     consul:
       host: consul
 server:
-  port: 8083
+  port: 8081
 logging:
   level:
     com:

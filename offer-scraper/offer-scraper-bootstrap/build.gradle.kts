@@ -24,3 +24,12 @@ dependencies {
     implementation(project(":offer-scraper-domain"))
     implementation (libs.spring.boot.starter)
 }
+
+tasks.bootBuildImage {
+    imageName = "priceflow-offers:latest"
+    environment.put("BP_HEALTH_CHECKER_ENABLED", "true")
+    buildpacks.addAll(
+        "urn:cnb:builder:paketo-buildpacks/java",
+        "gcr.io/paketo-buildpacks/health-checker"
+    )
+}

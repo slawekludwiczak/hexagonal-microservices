@@ -4,5 +4,6 @@ spring:
       - persistence.yml
       - api.yml
       - discovery.yml
+      - events.yml
   application:
     name: priceflow-product-catalog

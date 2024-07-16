@@ -10,4 +10,4 @@ spring:
           jws-algorithms: RS256 #default
           issuer-uri: http://keycloak:8080/realms/priceflow
 server:
-  port: 8084
+  port: 8083

@@ -87,6 +87,17 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <image>
+                        <buildpacks>
+                            <buildpack>urn:cnb:builder:paketo-buildpacks/java</buildpack>
+                            <buildpack>gcr.io/paketo-buildpacks/health-checker</buildpack>
+                        </buildpacks>
+                        <env>
+                            <BP_HEALTH_CHECKER_ENABLED>true</BP_HEALTH_CHECKER_ENABLED>
+                        </env>
+                    </image>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>com.github.eirslett</groupId>
