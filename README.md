@@ -24,8 +24,12 @@ Configure your hosts file with additional mappings (keycloak is mandatory):
 127.0.0.1   rabbitmq
 ```
 
-Frontend application is running on port `8081`.
+Frontend application is running on port `8081`. Keycloak test user is `user1 : pass1`
 
-Keycloak test user is `user1 : pass1`
-
-You can access Consul management console on port `8085` and RabbitMQ console on `15672` with user `guest : guest`
+You can access:
+- Frontend application on port `8081`
+- Keycloak admin console on port `8080` with user `admin : admin`
+- Consul management console on port `8085`
+- RabbitMQ console on port `15672` with user `guest : guest`
+- Grafana on port `3000` with user `admin : grafana`
+- Prometheus on port `9090`
