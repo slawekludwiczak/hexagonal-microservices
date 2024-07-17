@@ -32,8 +32,9 @@ public class OfferScraperApplication {
     }
 
     @Bean
-    CreateOfferUseCase createOfferUseCase(OfferCrudPersistencePort offerCrudPersistencePort) {
-        return new CreateOfferUseCase(offerCrudPersistencePort);
+    CreateOfferUseCase createOfferUseCase(ProductCrudPersistencePort productCrudPersistencePort,
+                                          OfferCrudPersistencePort offerCrudPersistencePort) {
+        return new CreateOfferUseCase(productCrudPersistencePort, offerCrudPersistencePort);
     }
 
     @Bean

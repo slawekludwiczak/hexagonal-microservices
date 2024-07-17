@@ -1,9 +1,9 @@
 package com.ludigi.priceflow.offer.crud.adapter.out.product;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -11,6 +11,9 @@ import java.util.UUID;
 class ProductJpaModel {
     @Id
     private UUID id;
+    @OneToMany
+    @JoinColumn(name = "product_id")
+    private List<ProductOfferJpaModel> offers = new ArrayList<>();
 
     public ProductJpaModel() {
     }
@@ -25,5 +28,13 @@ class ProductJpaModel {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public List<ProductOfferJpaModel> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(List<ProductOfferJpaModel> offers) {
+        this.offers = offers;
     }
 }
