@@ -10,7 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+class HomeController {
     private final Logger LOG = LoggerFactory.getLogger(HomeController.class);
     private final Counter counter;
 

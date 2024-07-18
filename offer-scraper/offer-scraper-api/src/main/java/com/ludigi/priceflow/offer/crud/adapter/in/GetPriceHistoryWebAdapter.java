@@ -7,7 +7,6 @@ import com.ludigi.priceflow.offer.crud.port.in.GetPriceHistoryUseCase;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.CurrentSecurityContext;
 import org.springframework.security.oauth2.jwt.Jwt;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@CrossOrigin("http://localhost:8888")
 public class GetPriceHistoryWebAdapter {
     private final GetPriceHistoryUseCase getPriceHistoryUseCase;
 

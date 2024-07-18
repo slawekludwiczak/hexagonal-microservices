@@ -1,11 +1,9 @@
 package com.ludigi.priceflow.offer.crud.adapter.out;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Entity
@@ -20,11 +18,13 @@ class OfferCrudJpaModel {
     private String selectorType;
     private String pageType;
     private Duration refreshInterval;
+    @Enumerated(EnumType.STRING)
+    private ChronoUnit refreshUnit;
 
     public OfferCrudJpaModel() {
     }
 
-    public OfferCrudJpaModel(UUID id, UUID productId, String url, String selector, String selectorType, String pageType, Duration refreshInterval) {
+    public OfferCrudJpaModel(UUID id, UUID productId, String url, String selector, String selectorType, String pageType, Duration refreshInterval, ChronoUnit refreshUnit) {
         this.id = id;
         this.productId = productId;
         this.url = url;
@@ -32,6 +32,7 @@ class OfferCrudJpaModel {
         this.selectorType = selectorType;
         this.pageType = pageType;
         this.refreshInterval = refreshInterval;
+        this.refreshUnit = refreshUnit;
     }
 
     public UUID getId() {
@@ -86,7 +87,15 @@ class OfferCrudJpaModel {
         return refreshInterval;
     }
 
-    public void setRefreshInterval(Duration refreshInterfal) {
-        this.refreshInterval = refreshInterfal;
+    public void setRefreshInterval(Duration refreshInterval) {
+        this.refreshInterval = refreshInterval;
+    }
+
+    public ChronoUnit getRefreshUnit() {
+        return refreshUnit;
+    }
+
+    public void setRefreshUnit(ChronoUnit refreshUnit) {
+        this.refreshUnit = refreshUnit;
     }
 }

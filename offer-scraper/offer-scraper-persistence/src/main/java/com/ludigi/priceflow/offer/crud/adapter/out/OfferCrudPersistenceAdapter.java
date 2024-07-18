@@ -1,9 +1,11 @@
 package com.ludigi.priceflow.offer.crud.adapter.out;
 
+import com.ludigi.priceflow.offer.common.vo.*;
 import com.ludigi.priceflow.offer.crud.Offer;
 import com.ludigi.priceflow.offer.crud.port.out.OfferCrudPersistencePort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -23,8 +25,25 @@ class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
                 offer.getSelector().selector(),
                 offer.getSelector().type().name(),
                 offer.getPageType().name(),
-                offer.getRefreshPeriod().asDuration()
+                offer.getRefreshPeriod().asDuration(),
+                offer.getRefreshPeriod().unit()
         );
         offerCrudJpaRepository.save(offerCrudJpaModel);
+    }
+
+    @Override
+    public List<Offer> findAllByProductId(ProductId productId) {
+        return offerCrudJpaRepository
+                .findAllByProductId(UUID.fromString(productId.value()))
+                .stream()
+                .map(entity -> new Offer(
+                        entity.getId(),
+                        new ProductId(entity.getProductId().toString()),
+                        new OfferUrl(entity.getUrl()),
+                        new Selector(entity.getSelector(), SelectorType.valueOf(entity.getSelectorType())),
+                        PageType.valueOf(entity.getPageType()),
+                        RefreshPeriod.from(entity.getRefreshInterval(), entity.getRefreshUnit())
+                ))
+                .toList();
     }
 }

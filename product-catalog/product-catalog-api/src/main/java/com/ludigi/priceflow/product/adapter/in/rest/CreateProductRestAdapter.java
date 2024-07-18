@@ -44,6 +44,5 @@ public class CreateProductRestAdapter {
     record CreateProductRequest(
             String name,
             String description
-    ) {
-    }
+    ) { }
 }

@@ -1,16 +1,12 @@
 package com.ludigi.priceflow.frontend.offers;
 
+import com.ludigi.priceflow.frontend.rest.client.OfferRestClient;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.time.temporal.ChronoUnit;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/offers")
-public class OffersController {
+class OffersController {
     private final OfferRestClient offerRestClient;
 
     public OffersController(OfferRestClient offerRestClient) {
@@ -23,11 +19,8 @@ public class OffersController {
     }
 
     @PostMapping("/add")
-    String createOffer(@RequestParam String offerUrl,
-                       @RequestParam String productId) {
-        OfferRestClient.CreateOfferCommand createOfferCommand = new OfferRestClient.CreateOfferCommand(offerUrl, productId,
-                "div[data-testid=ad-price-container] > h3", "CSS", "HTML", 1, ChronoUnit.HOURS.name());
+    String createOffer(@ModelAttribute OfferRestClient.CreateOfferCommand createOfferCommand) {
         offerRestClient.createOffer(createOfferCommand);
-        return "redirect:/offers";
+        return "redirect:/products/%s".formatted(createOfferCommand.productId());
     }
 }
