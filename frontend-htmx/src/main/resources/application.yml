@@ -23,16 +23,6 @@ spring:
       host: consul
 server:
   port: 8081
-logging:
-  level:
-    com:
-      ludigi:
-        priceflow:
-          frontend:
-            products: DEBUG
-    org:
-      springframework:
-        security: DEBUG
 management:
   endpoints:
     web:
