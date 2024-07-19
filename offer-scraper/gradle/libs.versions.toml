@@ -1,10 +1,10 @@
 [versions]
 junit = "5.10.2"
 jsoup = "1.17.2"
+slf4j = "2.0.13"
 spring-boot = "3.3.0"
 spring-dependency-management = "1.1.5"
 spring-cloud = "2023.0.2"
-#mockito = "5.12.0"
 
 [libraries]
 jsoup = { module = "org.jsoup:jsoup", version.ref = "jsoup" }
@@ -22,6 +22,7 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 #mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 #mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 h2 = { module = "com.h2database:h2" }
+slf4j = { module = "org.slf4j:slf4j-api", version.ref = "slf4j" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
