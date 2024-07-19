@@ -6,6 +6,7 @@ plugins {
 
 dependencies {
     implementation(libs.jsoup)
+    implementation(libs.slf4j)
     testImplementation(libs.junit.jupiter)
 }
 

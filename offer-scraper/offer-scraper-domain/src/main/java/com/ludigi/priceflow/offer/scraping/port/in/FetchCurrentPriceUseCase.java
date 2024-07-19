@@ -5,12 +5,15 @@ import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.scraping.PricePoint;
 import com.ludigi.priceflow.offer.scraping.port.out.OfferPersistencePort;
 import com.ludigi.priceflow.offer.scraping.port.out.PricePointPersistencePort;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
 public class FetchCurrentPriceUseCase {
+    private final static Logger LOG = LoggerFactory.getLogger(FetchCurrentPriceUseCase.class);
     private final OfferPersistencePort offerPersistencePort;
     private final PricePointPersistencePort pricePointPersistencePort;
 
@@ -24,9 +27,8 @@ public class FetchCurrentPriceUseCase {
         Optional<Price> price = activeOffer.fetchCurrentPrice();
         price.map(p -> new PricePoint(activeOffer.getId(), p, LocalDateTime.now())).ifPresentOrElse(
                 pricePointPersistencePort::save,
-                () -> System.out.printf("Price for offer %s not found\n", activeOffer.getId())
-
+                () -> LOG.debug("Price for offer {} not found", activeOffer.getId())
         );
-        System.out.printf("Fetched price %s for offer %s%n", price, activeOffer.getUrl().url());
+        LOG.debug("Fetched price {} for offer {}", price, activeOffer.getUrl().url());
     }
 }
