@@ -18,9 +18,6 @@ import static java.util.stream.Collectors.groupingBy;
 
 @FeignClient(value = "priceflow-offer-scraper", configuration = {FeignConfiguration.class})
 public interface OfferRestClient {
-    @GetMapping("/api/offers/mock/prices")
-    PriceHistoryResponse findAllMock();
-
     @GetMapping("/api/offers/{id}/prices")
     PriceHistoryResponse findPriceHistoryByOfferId(@PathVariable("id") String id);
 
