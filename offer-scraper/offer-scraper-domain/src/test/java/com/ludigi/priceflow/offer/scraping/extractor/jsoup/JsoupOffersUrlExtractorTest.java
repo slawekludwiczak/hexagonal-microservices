@@ -9,14 +9,11 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class JsoupOffersUrlExtractorTest {
+    private final JsoupOffersUrlExtractor jsoupOffersUrlExtractor = new JsoupOffersUrlExtractor();
 
     @Nested
     class OlxTest {
-        JsoupOffersUrlExtractor jsoupOffersUrlExtractor = new JsoupOffersUrlExtractor();
-
         @Test
         void shouldScrapeUrlsFromOlx() {
             String url = "https://www.olx.pl/nieruchomosci/mieszkania/sprzedaz/";
@@ -30,8 +27,6 @@ class JsoupOffersUrlExtractorTest {
 
     @Nested
     class OtoDomTest {
-        JsoupOffersUrlExtractor jsoupOffersUrlExtractor = new JsoupOffersUrlExtractor();
-
         @Test
         void shouldScrapeUrlsFromOlx() {
             String url = "https://www.otodom.pl/pl/wyniki/sprzedaz/mieszkanie/cala-polska";

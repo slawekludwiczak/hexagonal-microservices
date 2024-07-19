@@ -5,6 +5,7 @@ import com.ludigi.priceflow.offer.common.vo.SelectorType;
 import com.ludigi.priceflow.offer.common.vo.Currency;
 import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.scraping.extractor.jsoup.JsoupPriceExtractor;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -39,29 +40,44 @@ class JsoupPriceExtractorTest {
         void shouldExtractIntegerPrice() {
             verifyPrice("15", new Price(15, Currency.NONE));
         }
+    }
 
-        private void verifyPrice(String htmlPrice, Price expectedPrice) {
-            String html = """
+    @Nested
+    class WithCurrency {
+        @Test
+        void shouldExtractPriceWithCurrencyAttached() {
+            verifyPrice("15.5zł", new Price(15.5, Currency.NONE));
+            verifyPrice("15.54zł", new Price(15.54, Currency.NONE));
+        }
+
+        @Test
+        void shouldExtractPriceWithCurrencySeparatedBySpace() {
+            verifyPrice("15.5 zł", new Price(15.5, Currency.NONE));
+            verifyPrice("15.54 zł", new Price(15.54, Currency.NONE));
+        }
+    }
+
+    private void verifyPrice(String htmlPrice, Price expectedPrice) {
+        String html = """
                     <html>
                         <body>
                             <p class="price">%s</p>
                         </body>
                     </html>
                     """;
-            String htmlWithPrice = html.formatted(htmlPrice);
-            Optional<Price> price = jsoupPriceExtractor.extractPrice(
-                    htmlWithPrice,
-                    new Selector("p.price", SelectorType.CSS)
-            );
-            assertFalse(price.isEmpty());
-            Price returnedPrice = price.get();
-            assertEquals(expectedPrice.value(), returnedPrice.value());
-            assertEquals(expectedPrice.currency(), returnedPrice.currency());
-        }
+        String htmlWithPrice = html.formatted(htmlPrice);
+        Optional<Price> price = jsoupPriceExtractor.extractPrice(
+                htmlWithPrice,
+                new Selector("p.price", SelectorType.CSS)
+        );
+        assertFalse(price.isEmpty());
+        Price returnedPrice = price.get();
+        assertEquals(expectedPrice.value(), returnedPrice.value());
+        assertEquals(expectedPrice.currency(), returnedPrice.currency());
     }
 
     @Nested
-    class InvalidSelector {
+    class Selectors {
         private final String html = """
                     <html>
                         <body>
@@ -71,9 +87,17 @@ class JsoupPriceExtractorTest {
                     """;
 
         @Test
+        @DisplayName("Invalid selector")
         void shouldNotFindPriceForInvalidSelector() {
             Optional<Price> price = jsoupPriceExtractor.extractPrice(html, new Selector("p.value", SelectorType.CSS));
             assertTrue(price.isEmpty());
+        }
+
+        @Test
+        @DisplayName("Valid selector")
+        void shouldFindPriceForValidSelector() {
+            Optional<Price> price = jsoupPriceExtractor.extractPrice(html, new Selector(".price", SelectorType.CSS));
+            assertTrue(price.isPresent());
         }
     }
 
