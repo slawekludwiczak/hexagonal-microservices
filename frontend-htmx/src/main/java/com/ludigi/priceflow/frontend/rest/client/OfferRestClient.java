@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import static java.util.stream.Collectors.averagingDouble;
+import static java.util.stream.Collectors.groupingBy;
 
 @FeignClient(value = "priceflow-offer-scraper", configuration = {FeignConfiguration.class})
 public interface OfferRestClient {
@@ -30,6 +34,14 @@ public interface OfferRestClient {
     Optional<OfferResponse> findOfferById(@PathVariable("id") String id);
 
     record PriceHistoryResponse(List<OfferPrice> prices) {
+        public Map<LocalDateTime, Double> getChart() {
+            return prices.stream()
+                    .collect(groupingBy(
+                                    OfferPrice::time,
+                                    averagingDouble(op -> op.price().value())
+                            )
+                    );
+        }
     }
 
     record OfferPrice(Price price, LocalDateTime time) {

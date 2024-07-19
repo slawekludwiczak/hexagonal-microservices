@@ -30,6 +30,7 @@ class OffersController {
         OfferRestClient.PriceHistoryResponse offerPriceHistory = offerRestClient.findPriceHistoryByOfferId(id);
         model.addAttribute("offer", id);
         model.addAttribute("priceHistory", offerPriceHistory);
+        model.addAttribute("history", offerPriceHistory.getChart());
         return "offers/offer";
     }
 }
