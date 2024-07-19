@@ -3,23 +3,34 @@ package com.ludigi.priceflow.frontend.rest.client;
 import com.ludigi.priceflow.frontend.config.feign.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @FeignClient(value = "priceflow-offer-scraper", configuration = {FeignConfiguration.class})
 public interface OfferRestClient {
     @GetMapping("/api/offers/mock/prices")
     PriceHistoryResponse findAllMock();
+
+    @GetMapping("/api/offers/{id}/prices")
+    PriceHistoryResponse findPriceHistoryByOfferId(@PathVariable("id") String id);
+
     @PostMapping("/api/offers")
     void createOffer(CreateOfferCommand command);
+
     @GetMapping("/api/offers")
     OffersResponse findOffersByProductId(@RequestParam("productId") String productId);
 
-    record PriceHistoryResponse(List<OfferPrice> prices) {}
+    @GetMapping("/api/offers/{id}")
+    Optional<OfferResponse> findOfferById(@PathVariable("id") String id);
+
+    record PriceHistoryResponse(List<OfferPrice> prices) {
+    }
 
     record OfferPrice(Price price, LocalDateTime time) {
     }
@@ -32,7 +43,9 @@ public interface OfferRestClient {
         PLN
     }
 
-    record OffersResponse(List<OfferResponse> offers) { }
+    record OffersResponse(List<OfferResponse> offers) {
+    }
+
     record OfferResponse(UUID id,
                          String offerUrl,
                          String productId,
@@ -51,5 +64,6 @@ public interface OfferRestClient {
             String pageType,
             int refreshValue,
             String refreshUnit
-    ) { }
+    ) {
+    }
 }
