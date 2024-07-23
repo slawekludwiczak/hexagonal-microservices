@@ -21,6 +21,11 @@ spring:
   cloud:
     consul:
       host: consul
+    openfeign:
+      client:
+        config:
+          default:
+            dismiss404: true
 server:
   port: 8081
 management:
