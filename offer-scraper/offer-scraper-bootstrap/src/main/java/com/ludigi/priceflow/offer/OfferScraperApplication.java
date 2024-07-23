@@ -60,4 +60,9 @@ public class OfferScraperApplication {
     FindOfferUseCase findOfferUseCase(OfferCrudPersistencePort offerCrudPersistencePort) {
         return new FindOfferUseCase(offerCrudPersistencePort);
     }
+
+    @Bean
+    EditOfferUseCase editOfferUseCase(OfferCrudPersistencePort offerCrudPersistencePort) {
+        return new EditOfferUseCase(offerCrudPersistencePort);
+    }
 }

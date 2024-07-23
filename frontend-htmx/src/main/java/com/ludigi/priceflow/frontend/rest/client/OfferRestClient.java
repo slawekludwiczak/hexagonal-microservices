@@ -2,10 +2,7 @@ package com.ludigi.priceflow.frontend.rest.client;
 
 import com.ludigi.priceflow.frontend.config.feign.FeignConfiguration;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,6 +26,10 @@ public interface OfferRestClient {
 
     @GetMapping("/api/offers/{id}")
     Optional<OfferResponse> findOfferById(@PathVariable("id") String id);
+
+    @PatchMapping("/api/offers/{id}")
+    void updateOffer(@PathVariable("id") UUID offerId,
+                     @RequestBody EditOfferCommand editOfferCommand);
 
     record PriceHistoryResponse(List<OfferPrice> prices) {
         public Map<LocalDateTime, Double> getChart() {
@@ -73,6 +74,11 @@ public interface OfferRestClient {
             String pageType,
             int refreshValue,
             String refreshUnit
-    ) {
-    }
+    ) { }
+
+    record EditOfferCommand(String selector,
+                            String selectorType,
+                            String pageType,
+                            int refreshValue,
+                            String refreshUnit) { }
 }

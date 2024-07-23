@@ -42,11 +42,23 @@ public class Offer {
         return selector;
     }
 
+    public void setSelector(Selector selector) {
+        this.selector = selector;
+    }
+
     public PageType getPageType() {
         return pageType;
     }
 
+    public void setPageType(PageType pageType) {
+        this.pageType = pageType;
+    }
+
     public RefreshPeriod getRefreshPeriod() {
         return refreshPeriod;
+    }
+
+    public void setRefreshPeriod(RefreshPeriod refreshPeriod) {
+        this.refreshPeriod = refreshPeriod;
     }
 }
