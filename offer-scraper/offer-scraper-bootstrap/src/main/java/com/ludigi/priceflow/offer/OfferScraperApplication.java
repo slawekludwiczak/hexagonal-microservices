@@ -1,10 +1,7 @@
 package com.ludigi.priceflow.offer;
 
 import com.ludigi.priceflow.offer.common.events.EventPublisher;
-import com.ludigi.priceflow.offer.crud.port.in.AddProductUseCase;
-import com.ludigi.priceflow.offer.crud.port.in.CreateOfferUseCase;
-import com.ludigi.priceflow.offer.crud.port.in.FindOffersUseCase;
-import com.ludigi.priceflow.offer.crud.port.in.GetPriceHistoryUseCase;
+import com.ludigi.priceflow.offer.crud.port.in.*;
 import com.ludigi.priceflow.offer.crud.port.out.OfferCrudPersistencePort;
 import com.ludigi.priceflow.offer.crud.port.out.PriceHistoryPersistencePort;
 import com.ludigi.priceflow.offer.crud.port.out.ProductCrudPersistencePort;
@@ -57,5 +54,10 @@ public class OfferScraperApplication {
     @Bean
     FindOffersUseCase findOffersUseCase(OfferCrudPersistencePort offerCrudPersistencePort) {
         return new FindOffersUseCase(offerCrudPersistencePort);
+    }
+
+    @Bean
+    FindOfferUseCase findOfferUseCase(OfferCrudPersistencePort offerCrudPersistencePort) {
+        return new FindOfferUseCase(offerCrudPersistencePort);
     }
 }

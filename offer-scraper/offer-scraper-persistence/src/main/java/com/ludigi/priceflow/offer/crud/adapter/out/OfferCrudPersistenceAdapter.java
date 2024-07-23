@@ -6,6 +6,7 @@ import com.ludigi.priceflow.offer.crud.port.out.OfferCrudPersistencePort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -36,14 +37,23 @@ class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
         return offerCrudJpaRepository
                 .findAllByProductId(UUID.fromString(productId.value()))
                 .stream()
-                .map(entity -> new Offer(
-                        entity.getId(),
-                        new ProductId(entity.getProductId().toString()),
-                        new OfferUrl(entity.getUrl()),
-                        new Selector(entity.getSelector(), SelectorType.valueOf(entity.getSelectorType())),
-                        PageType.valueOf(entity.getPageType()),
-                        RefreshPeriod.from(entity.getRefreshInterval(), entity.getRefreshUnit())
-                ))
+                .map(OfferCrudPersistenceAdapter::fromEntity)
                 .toList();
+    }
+
+    @Override
+    public Optional<Offer> findById(UUID offerId) {
+        return offerCrudJpaRepository.findById(offerId).map(OfferCrudPersistenceAdapter::fromEntity);
+    }
+
+    private static Offer fromEntity(OfferCrudJpaModel entity) {
+        return new Offer(
+                entity.getId(),
+                new ProductId(entity.getProductId().toString()),
+                new OfferUrl(entity.getUrl()),
+                new Selector(entity.getSelector(), SelectorType.valueOf(entity.getSelectorType())),
+                PageType.valueOf(entity.getPageType()),
+                RefreshPeriod.from(entity.getRefreshInterval(), entity.getRefreshUnit())
+        );
     }
 }
