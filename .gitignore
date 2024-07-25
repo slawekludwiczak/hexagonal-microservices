@@ -45,3 +45,4 @@ bin/
 node_modules
 dist
 **/target/**
+**/db
