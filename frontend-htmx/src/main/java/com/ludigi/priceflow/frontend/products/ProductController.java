@@ -3,6 +3,7 @@ package com.ludigi.priceflow.frontend.products;
 import com.ludigi.priceflow.frontend.exception.NotFoundException;
 import com.ludigi.priceflow.frontend.rest.client.OfferRestClient;
 import com.ludigi.priceflow.frontend.rest.client.ProductRestClient;
+import com.ludigi.priceflow.frontend.view.breadcrumbs.Link;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ class ProductController {
     String getProducts(Model model) {
         List<ProductRestClient.ProductResponse> products = productRestClient.findAll();
         model.addAttribute("products", products);
+        model.addAttribute("links", List.of(new Link("Products", "/products")));
         return "products/products";
     }
 
@@ -38,6 +40,10 @@ class ProductController {
         model.addAttribute("product", product);
         OfferRestClient.OffersResponse productOffers = offerRestClient.findOffersByProductId(id);
         model.addAttribute("offers", productOffers.offers());
+        model.addAttribute("links", List.of(
+                new Link("Products", "/products"),
+                new Link(product.name(), "")
+        ));
         return "products/product";
     }
 
