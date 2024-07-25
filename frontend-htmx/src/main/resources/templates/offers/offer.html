@@ -14,7 +14,7 @@
         http://olx.pl/asdf
     </h1>
 
-    <div class="w-3/4">
+    <div class="relative h-80 w-full">
         <canvas id="chart"></canvas>
     </div>
 
@@ -90,13 +90,13 @@
 <script th:inline="javascript">
     const history = [[${history}]];
     let map = new Map(Object.entries(history));
-    console.log(map);
     map = new Map([...map.entries()].sort());
 
     new Chart("chart", {
         type: "line",
         data: {
-            labels: Array.from(map.keys()).map(lab => lab.substring(1, 16)),
+            labels: Array.from(map.keys())
+                .map(lab => lab.substring(0, 16)),
             datasets: [{
                 label: 'Price history',
                 fill: false,
@@ -108,11 +108,12 @@
         },
         options: {
             responsive: true,
+            maintainAspectRatio: false,
             plugins: {
                 legend: {
                     position: 'top',
                 },
-            }
+            },
         }
     });
 </script>
