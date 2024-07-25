@@ -6,130 +6,137 @@
     <link th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
-<div class="flex flex-col items-center">
-    <h1 th:text="${product.name}"
-        class="text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8">
-        Product Xyz
-    </h1>
-    <p th:text="${product.description}">Some product description</p>
+<div class="container mx-auto px-32">
+    <div class="flex flex-col items-center">
+        <h1 th:text="${product.name}"
+            class="text-8xl py-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
+            Product Xyz
+        </h1>
+        <h2 class="my-4 text-xl">Description</h2>
+        <p class="border border-solid p-6 w-full" th:text="${product.description}">Some product description</p>
 
-    <div th:if="not ${offers.isEmpty()}">
-        <h2 class="my-4 text-xl">Offers</h2>
+        <div th:if="not ${offers.isEmpty()}" th:remove="tag">
+            <h2 class="mt-8 mb-4 text-xl">Offers</h2>
 
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                    <th scope="col" class="px-6 py-3">
-                        Offer URL
-                    </th>
-                </tr>
-                </thead>
-                <tbody th:remove="all-but-first">
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
-                    th:each="offer: ${offers}">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-blue-400">
-                        <a href="#" th:href="@{|/offers/${offer.id}|}" th:text="${offer.offerUrl}"
-                           class="hover:underline">
-                            http://olx.pl/abcdef
-                        </a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <a href="#">
-                            http://allegro.pl/asdf
-                        </a>
-                    </td>
-                </tr>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                    <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        <a href="#">
-                            http://olx.pl/xyz
-                        </a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-full">
+                <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            Offer URL
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody th:remove="all-but-first">
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                        th:each="offer: ${offers}">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap text-blue-400">
+                            <a href="#" th:href="@{|/offers/${offer.id}|}" th:text="${offer.offerUrl}"
+                               class="hover:underline">
+                                http://olx.pl/abcdef
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a href="#">
+                                http://allegro.pl/asdf
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            <a href="#">
+                                http://olx.pl/xyz
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
+        <h2 class="mt-8 mb-4 text-xl">Create new offer</h2>
+
+        <form class="mx-auto w-96" action="#" method="post" th:action="@{/offers/add}">
+            <div class="mb-5">
+                <label for="offerUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Offer
+                    URL</label>
+                <input type="url"
+                       id="offerUrl"
+                       name="offerUrl"
+                       placeholder="https://..."
+                       required
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
+            <div class="mb-5">
+                <label for="selector"
+                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector</label>
+                <input type="text"
+                       id="selector"
+                       name="selector"
+                       placeholder="div > p.price"
+                       required
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
+            <div class="mb-5">
+                <label for="selectorType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
+                    Type</label>
+                <select id="selectorType"
+                        name="selectorType"
+                        required
+                        class="disabled:opacity-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="CSS">CSS</option>
+                </select>
+            </div>
+            <div class="mb-5">
+                <label for="pageType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Page
+                    Type</label>
+                <select id="pageType"
+                        name="pageType"
+                        required
+                        class="disabled:opacity-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="HTML">HTML</option>
+                </select>
+            </div>
+            <div class="mb-5">
+                <label for="refreshValue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Refresh
+                    time</label>
+                <input type="number"
+                       id="refreshValue"
+                       name="refreshValue"
+                       placeholder="15"
+                       required
+                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+            </div>
+            <div class="mb-5">
+                <label for="refreshUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
+                    Type</label>
+                <select id="refreshUnit"
+                        name="refreshUnit"
+                        required
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="SECONDS">Seconds</option>
+                    <option value="MINUTES" selected>Minutes</option>
+                    <option value="HOURS">Hours</option>
+                    <option value="DAYS">Days</option>
+                </select>
+            </div>
+            <div class="mb-5">
+                <input type="text" id="productId" name="productId" th:value="${product.id}" hidden required/>
+            </div>
+            <button type="submit"
+                    class="block mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Add Offer
+            </button>
+        </form>
+
+        <a href="#" th:href="@{/products}"
+           class="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">
+            Back to Product listing
+        </a>
     </div>
-
-    <form class="mx-auto w-96 my-8" action="#" method="post" th:action="@{/offers/add}">
-        <div class="mb-5">
-            <label for="offerUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Offer URL</label>
-            <input type="url"
-                   id="offerUrl"
-                   name="offerUrl"
-                   placeholder="https://..."
-                   required
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
-        <div class="mb-5">
-            <label for="selector" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector</label>
-            <input type="text"
-                   id="selector"
-                   name="selector"
-                   placeholder="div > p.price"
-                   required
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
-        <div class="mb-5">
-            <label for="selectorType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
-                Type</label>
-            <select id="selectorType"
-                    name="selectorType"
-                    required
-                    class="disabled:opacity-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="CSS">CSS</option>
-            </select>
-        </div>
-        <div class="mb-5">
-            <label for="pageType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Page Type</label>
-            <select id="pageType"
-                    name="pageType"
-                    required
-                    class="disabled:opacity-50 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="HTML">HTML</option>
-            </select>
-        </div>
-        <div class="mb-5">
-            <label for="refreshValue" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Refresh
-                time</label>
-            <input type="number"
-                   id="refreshValue"
-                   name="refreshValue"
-                   placeholder="15"
-                   required
-                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-        </div>
-        <div class="mb-5">
-            <label for="refreshUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
-                Type</label>
-            <select id="refreshUnit"
-                    name="refreshUnit"
-                    required
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <option value="SECONDS">Seconds</option>
-                <option value="MINUTES" selected>Minutes</option>
-                <option value="HOURS">Hours</option>
-                <option value="DAYS">Days</option>
-            </select>
-        </div>
-        <div class="mb-5">
-            <input type="text" id="productId" name="productId" th:value="${product.id}" hidden required/>
-        </div>
-        <button type="submit"
-                class="block mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Add Offer
-        </button>
-    </form>
-
-    <a href="#" th:href="@{/products}"
-       class="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">
-        Back to Product listing
-    </a>
 </div>
-
 
 </body>
 </html>

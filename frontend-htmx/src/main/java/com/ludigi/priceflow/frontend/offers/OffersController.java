@@ -17,11 +17,6 @@ class OffersController {
         this.offerRestClient = offerRestClient;
     }
 
-    @GetMapping("")
-    String getOffers() {
-        return "offers/offers";
-    }
-
     @PostMapping("/add")
     String createOffer(@ModelAttribute OfferRestClient.CreateOfferCommand createOfferCommand) {
         offerRestClient.createOffer(createOfferCommand);

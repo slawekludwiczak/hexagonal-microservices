@@ -42,19 +42,16 @@ public interface OfferRestClient {
         }
     }
 
-    record OfferPrice(Price price, LocalDateTime time) {
-    }
+    record OfferPrice(Price price, LocalDateTime time) { }
 
-    record Price(double value, Currency currency) {
-    }
+    record Price(double value, Currency currency) { }
 
     enum Currency {
         NONE,
         PLN
     }
 
-    record OffersResponse(List<OfferResponse> offers) {
-    }
+    record OffersResponse(List<OfferResponse> offers) { }
 
     record OfferResponse(UUID id,
                          String offerUrl,
@@ -63,8 +60,7 @@ public interface OfferRestClient {
                          String selectorType,
                          String pageType,
                          int refreshValue,
-                         String refreshUnit) {
-    }
+                         String refreshUnit) { }
 
     record CreateOfferCommand(
             String offerUrl,

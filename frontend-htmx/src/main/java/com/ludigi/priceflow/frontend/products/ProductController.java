@@ -35,8 +35,8 @@ class ProductController {
         ProductRestClient.ProductResponse product = productRestClient
                 .findById(id)
                 .orElseThrow(NotFoundException::new);
-        OfferRestClient.OffersResponse productOffers = offerRestClient.findOffersByProductId(id);
         model.addAttribute("product", product);
+        OfferRestClient.OffersResponse productOffers = offerRestClient.findOffersByProductId(id);
         model.addAttribute("offers", productOffers.offers());
         return "products/product";
     }

@@ -40,6 +40,5 @@ public class CreateOfferUseCase {
             String pageType,
             int refreshValue,
             String refreshUnit
-    ) {
-    }
+    ) { }
 }

@@ -9,7 +9,7 @@
 <body>
 <div class="flex flex-col items-center">
     <h1 th:text="${offer.offerUrl()}"
-        class="text-xl mt-16 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 mb-8">
+        class="text-xl my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
         http://olx.pl/asdf
     </h1>
 
@@ -23,15 +23,6 @@
           th:action="@{|/offers/${offer.id}/edit|}"
           th:object="${editOfferCommand}"
     >
-        <!--        <div class="mb-5">-->
-        <!--            <label for="offerUrl" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Offer URL</label>-->
-        <!--            <input type="url"-->
-        <!--                   id="offerUrl"-->
-        <!--                   name="offerUrl"-->
-        <!--                   placeholder="https://..."-->
-        <!--                   required-->
-        <!--                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>-->
-        <!--        </div>-->
         <div class="mb-5">
             <label for="selector" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector</label>
             <input type="text"
@@ -94,24 +85,25 @@
         </button>
     </form>
 
-    <button type="button"
-            onclick="history.back()"
+    <a type="button"
+            th:href="@{|/products/${offer.productId}|}"
             class="inline-flex text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4">
-        Back
-    </button>
+        Back to product
+    </a>
 </div>
 
 <script th:inline="javascript">
     const history = [[${history}]];
     let map = new Map(Object.entries(history));
+    console.log(map);
     map = new Map([...map.entries()].sort());
 
-    let chart = new Chart("chart", {
+    new Chart("chart", {
         type: "line",
         data: {
             labels: Array.from(map.keys()).map(lab => lab.substring(1, 16)),
             datasets: [{
-                label: 'Historia ceny',
+                label: 'Price history',
                 fill: false,
                 lineTension: 0,
                 backgroundColor: "rgba(0,0,255,1.0)",
