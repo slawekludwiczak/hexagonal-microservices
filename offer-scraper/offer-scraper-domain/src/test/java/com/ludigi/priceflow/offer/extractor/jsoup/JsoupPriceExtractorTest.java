@@ -55,6 +55,18 @@ class JsoupPriceExtractorTest {
             verifyPrice("15.5 zł", new Price(15.5, Currency.NONE));
             verifyPrice("15.54 zł", new Price(15.54, Currency.NONE));
         }
+
+        @Test
+        void shouldExtractPriceWithCurrencySeparatedBySpaceWithExtraSpaces() {
+            verifyPrice("15.5 zł  ", new Price(15.5, Currency.NONE));
+            verifyPrice("  15.54 zł", new Price(15.54, Currency.NONE));
+        }
+
+        @Test
+        void shouldExtractPriceWithCurrencySeparatedBySpaceWithHtmlEntity() {
+            verifyPrice("15.5 zł&nbsp;", new Price(15.5, Currency.NONE));
+            verifyPrice("&nbsp;15.54 zł", new Price(15.54, Currency.NONE));
+        }
     }
 
     private void verifyPrice(String htmlPrice, Price expectedPrice) {

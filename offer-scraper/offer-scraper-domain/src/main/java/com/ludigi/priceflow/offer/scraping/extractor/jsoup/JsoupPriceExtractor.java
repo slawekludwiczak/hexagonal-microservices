@@ -33,7 +33,7 @@ public class JsoupPriceExtractor implements PriceExtractor {
     }
 
     private double parseDouble(String number) {
-        String numberDotSeparator = number.replaceAll(",", ".").replaceAll("\\s+", "");
+        String numberDotSeparator = number.replaceAll(",", ".").replaceAll("[^0-9.]", "");
         DecimalFormat df = new DecimalFormat("#.#");
         try {
             return df.parse(numberDotSeparator).doubleValue();
