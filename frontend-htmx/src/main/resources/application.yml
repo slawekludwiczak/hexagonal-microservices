@@ -28,8 +28,6 @@ spring:
             dismiss404: true
       http2client:
         enabled: true
-  config:
-    import: optional:file:.env[.properties]
   profiles:
     default: dev
 server:
