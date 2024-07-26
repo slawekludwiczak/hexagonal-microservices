@@ -4,6 +4,7 @@ spring-dependency-management = "1.1.5"
 spring-cloud = "2023.0.2"
 junit = "5.10.2"
 mockito = "5.12.0"
+loki-logback-appender = "1.5.2"
 
 [libraries]
 spring-boot-starter = { module = "org.springframework.boot:spring-boot-starter" }
@@ -20,6 +21,8 @@ junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher
 mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-junit-jupiter = { module = "org.mockito:mockito-junit-jupiter", version.ref = "mockito" }
 h2 = { module = "com.h2database:h2" }
+micrometer-registry-prometheus = { module = "io.micrometer:micrometer-registry-prometheus"}
+loki-logback-appender = { module = "com.github.loki4j:loki-logback-appender", version.ref = "loki-logback-appender" }
 
 [plugins]
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }

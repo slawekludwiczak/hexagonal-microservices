@@ -15,6 +15,7 @@ dependencyManagement {
 }
 
 dependencies {
+    implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
     implementation(project(":product-catalog-domain"))
     implementation(project(":product-catalog-api"))
     implementation(project(":product-catalog-persistence"))
@@ -23,8 +24,9 @@ dependencies {
     implementation(libs.spring.boot.starter)
     testImplementation(libs.spring.boot.starter.test)
     testRuntimeOnly(libs.junit.platform.launcher)
-    implementation(platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES))
-    implementation("org.springframework.cloud:spring-cloud-starter-consul-discovery")
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.micrometer.registry.prometheus)
+    implementation(libs.loki.logback.appender)
 }
 
 tasks.test {
