@@ -23,6 +23,9 @@ dependencies {
     implementation(project(":offer-scraper-api"))
     implementation(project(":offer-scraper-domain"))
     implementation (libs.spring.boot.starter)
+    implementation(libs.spring.boot.starter.actuator)
+    implementation(libs.micrometer.registry.prometheus)
+    implementation(libs.loki.logback.appender)
 }
 
 tasks.bootBuildImage {

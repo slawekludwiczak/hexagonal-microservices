@@ -7,6 +7,14 @@ spring:
       - classpath:api.yml
       - classpath:events.yml
       - classpath:discovery.yml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, metrics, prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
 logging:
   level:
     com:
