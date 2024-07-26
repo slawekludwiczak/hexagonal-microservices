@@ -9,9 +9,13 @@
 <body class="dark:bg-gray-800">
 <div class="flex flex-col items-center container mx-auto mb-16">
     <div th:replace="~{fragments/fragments :: breadcrumbs(${links})}"></div>
-    <h1 th:text="${offer.offerUrl()}"
-        class="text-xl my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-        http://olx.pl/asdf
+    <h1 class="text-xl my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-flex">
+        <span th:text="${offer.offerUrl()}">http://olx.pl/asdf</span>
+        <a href="#" th:href="@{${offer.offerUrl()}}" class="ml-4" target="_blank">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 stoke-1 stroke-primary-500 hover:stroke-primary-700">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+            </svg>
+        </a>
     </h1>
 
     <div class="relative h-80 w-full">
