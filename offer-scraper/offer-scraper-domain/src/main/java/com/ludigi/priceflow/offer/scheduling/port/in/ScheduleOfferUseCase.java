@@ -8,7 +8,7 @@ import com.ludigi.priceflow.offer.scheduling.port.out.OfferSchedulingPersistence
 import java.util.List;
 
 public class ScheduleOfferUseCase {
-    private static final int DEFAULT_POOL_SIZE = 10;
+    public static final int DEFAULT_POOL_SIZE = 10;
     private final OfferSchedulingPersistencePort offerSchedulingPersistencePort;
     private final EventPublisher eventPublisher;
 

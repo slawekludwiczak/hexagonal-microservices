@@ -8,6 +8,7 @@ dependencies {
     implementation(libs.jsoup)
     implementation(libs.slf4j)
     testImplementation(libs.junit.jupiter)
+    testImplementation(libs.bundles.mockito)
 }
 
 tasks.test {

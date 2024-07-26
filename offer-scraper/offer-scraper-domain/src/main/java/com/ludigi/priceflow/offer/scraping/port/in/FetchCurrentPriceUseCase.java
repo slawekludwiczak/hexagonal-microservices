@@ -3,6 +3,8 @@ package com.ludigi.priceflow.offer.scraping.port.in;
 import com.ludigi.priceflow.offer.scraping.ActiveOffer;
 import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.scraping.PricePoint;
+import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
+import com.ludigi.priceflow.offer.scraping.extractor.jsoup.JsoupPriceExtractor;
 import com.ludigi.priceflow.offer.scraping.port.out.OfferPersistencePort;
 import com.ludigi.priceflow.offer.scraping.port.out.PricePointPersistencePort;
 import org.slf4j.Logger;
@@ -16,19 +18,28 @@ public class FetchCurrentPriceUseCase {
     private final static Logger LOG = LoggerFactory.getLogger(FetchCurrentPriceUseCase.class);
     private final OfferPersistencePort offerPersistencePort;
     private final PricePointPersistencePort pricePointPersistencePort;
+    private PriceExtractor priceExtractor = new JsoupPriceExtractor();
 
     public FetchCurrentPriceUseCase(OfferPersistencePort offerPersistencePort, PricePointPersistencePort pricePointPersistencePort) {
         this.offerPersistencePort = offerPersistencePort;
         this.pricePointPersistencePort = pricePointPersistencePort;
     }
 
+    public FetchCurrentPriceUseCase(OfferPersistencePort offerPersistencePort,
+                                    PricePointPersistencePort pricePointPersistencePort,
+                                    PriceExtractor priceExtractor) {
+        this(offerPersistencePort, pricePointPersistencePort);
+        this.priceExtractor = priceExtractor;
+    }
+
     public void fetchCurrentPrice(UUID offerId) {
         ActiveOffer activeOffer = offerPersistencePort.findById(offerId).orElseThrow();
-        Optional<Price> price = activeOffer.fetchCurrentPrice();
-        price.map(p -> new PricePoint(activeOffer.getId(), p, LocalDateTime.now())).ifPresentOrElse(
-                pricePointPersistencePort::save,
-                () -> LOG.debug("Price for offer {} not found", activeOffer.getId())
-        );
+        Optional<Price> price = activeOffer.fetchCurrentPrice(priceExtractor);
+        price.map(p -> new PricePoint(activeOffer.getId(), p, LocalDateTime.now()))
+                .ifPresentOrElse(
+                        pricePointPersistencePort::save,
+                        () -> LOG.debug("Price for offer {} not found", activeOffer.getId())
+                );
         LOG.debug("Fetched price {} for offer {}", price, activeOffer.getUrl().url());
     }
 }
