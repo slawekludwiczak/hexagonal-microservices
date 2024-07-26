@@ -42,4 +42,8 @@ public class ActiveOffer {
     public PageType getPageType() {
         return pageType;
     }
+
+    public InactiveOffer deactivate() {
+        return new InactiveOffer(this.id);
+    }
 }

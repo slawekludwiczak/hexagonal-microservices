@@ -9,7 +9,14 @@ import java.util.UUID;
 
 interface OfferSchedulingJpaRepository extends JpaRepository<OfferSchedulingJpaModel, UUID> {
 
-    @Query("select o from OfferSchedulingJpaModel o where o.scheduledAt is null or current_timestamp - o.scheduledAt > o.refreshInterval")
+    @Query("""
+            select 
+                o from OfferSchedulingJpaModel o 
+            where 
+                o.active = true
+                and 
+                (o.scheduledAt is null or current_timestamp - o.scheduledAt > o.refreshInterval)
+            """)
     List<OfferSchedulingJpaModel> findAllUnscheduled(Pageable page);
 
 }

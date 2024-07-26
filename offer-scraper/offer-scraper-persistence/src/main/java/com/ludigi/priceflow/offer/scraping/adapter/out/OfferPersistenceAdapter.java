@@ -5,7 +5,9 @@ import com.ludigi.priceflow.offer.common.vo.PageType;
 import com.ludigi.priceflow.offer.common.vo.Selector;
 import com.ludigi.priceflow.offer.common.vo.SelectorType;
 import com.ludigi.priceflow.offer.scraping.ActiveOffer;
+import com.ludigi.priceflow.offer.scraping.InactiveOffer;
 import com.ludigi.priceflow.offer.scraping.port.out.OfferPersistencePort;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -28,5 +30,13 @@ class OfferPersistenceAdapter implements OfferPersistencePort {
                         new Selector(entity.getSelector(), SelectorType.valueOf(entity.getSelectorType())),
                         PageType.valueOf(entity.getPageType())
                 ));
+    }
+
+    @Override
+    @Transactional
+    public void save(InactiveOffer offer) {
+        offerJpaModelRepository.findById(offer.getId())
+                .orElseThrow()
+                .setActive(false);
     }
 }

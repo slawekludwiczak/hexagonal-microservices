@@ -15,6 +15,7 @@ class OfferJpaModel {
     private String selector;
     private String selectorType;
     private String pageType;
+    private Boolean active;
 
     public UUID getId() {
         return id;
@@ -54,5 +55,13 @@ class OfferJpaModel {
 
     public void setPageType(String pageType) {
         this.pageType = pageType;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

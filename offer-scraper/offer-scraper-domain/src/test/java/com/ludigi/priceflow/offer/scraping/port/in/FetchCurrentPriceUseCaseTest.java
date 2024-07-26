@@ -1,6 +1,9 @@
 package com.ludigi.priceflow.offer.scraping.port.in;
 
-import com.ludigi.priceflow.offer.common.vo.*;
+import com.ludigi.priceflow.offer.common.vo.OfferUrl;
+import com.ludigi.priceflow.offer.common.vo.PageType;
+import com.ludigi.priceflow.offer.common.vo.Selector;
+import com.ludigi.priceflow.offer.common.vo.SelectorType;
 import com.ludigi.priceflow.offer.scraping.ActiveOffer;
 import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
 import com.ludigi.priceflow.offer.scraping.port.out.OfferPersistencePort;
@@ -16,7 +19,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 
 @ExtendWith(MockitoExtension.class)
@@ -51,8 +54,22 @@ class FetchCurrentPriceUseCaseTest {
                         )
                 );
         Mockito.when(priceExtractor.extractPrice(any(), any()))
-                .thenReturn(Optional.of(new Price(123.45, Currency.PLN)));
+                .thenReturn(Optional.empty());
         useCase.fetchCurrentPrice(offerId);
         Mockito.verify(pricePointPersistencePort, Mockito.times(1)).save(any());
+    }
+
+    @Test
+    void shouldMarkOfferInactiveWhenNoPrice() {
+        UUID offerId = UUID.randomUUID();
+        ActiveOffer offerMock = Mockito.mock(ActiveOffer.class);
+        Mockito.when(offerMock.getId()).thenReturn(offerId);
+        Mockito.when(offerMock.getUrl()).thenReturn(new OfferUrl("http://example.com"));
+        Mockito.when(offerPersistencePort.findById(offerId))
+                .thenReturn(Optional.of(offerMock));
+        Mockito.when(offerMock.fetchCurrentPrice(any())).thenReturn(Optional.empty());
+        useCase.fetchCurrentPrice(offerId);
+        Mockito.verify(offerMock, Mockito.times(1)).deactivate();
+        Mockito.verify(offerPersistencePort, Mockito.times(1)).save(any());
     }
 }

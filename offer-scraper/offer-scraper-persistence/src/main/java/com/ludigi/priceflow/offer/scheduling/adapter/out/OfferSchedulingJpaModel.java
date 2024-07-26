@@ -16,6 +16,7 @@ class OfferSchedulingJpaModel {
     private String url;
     private Duration refreshInterval;
     private LocalDateTime scheduledAt;
+    private Boolean active;
 
     public UUID getId() {
         return id;
@@ -47,5 +48,13 @@ class OfferSchedulingJpaModel {
 
     public void setScheduledAt(LocalDateTime scheduledAt) {
         this.scheduledAt = scheduledAt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 }

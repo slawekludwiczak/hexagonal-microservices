@@ -2,6 +2,7 @@ package com.ludigi.priceflow.offer.scraping.port.in;
 
 import com.ludigi.priceflow.offer.scraping.ActiveOffer;
 import com.ludigi.priceflow.offer.common.vo.Price;
+import com.ludigi.priceflow.offer.scraping.InactiveOffer;
 import com.ludigi.priceflow.offer.scraping.PricePoint;
 import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
 import com.ludigi.priceflow.offer.scraping.extractor.jsoup.JsoupPriceExtractor;
@@ -35,11 +36,19 @@ public class FetchCurrentPriceUseCase {
     public void fetchCurrentPrice(UUID offerId) {
         ActiveOffer activeOffer = offerPersistencePort.findById(offerId).orElseThrow();
         Optional<Price> price = activeOffer.fetchCurrentPrice(priceExtractor);
-        price.map(p -> new PricePoint(activeOffer.getId(), p, LocalDateTime.now()))
-                .ifPresentOrElse(
-                        pricePointPersistencePort::save,
-                        () -> LOG.debug("Price for offer {} not found", activeOffer.getId())
-                );
-        LOG.debug("Fetched price {} for offer {}", price, activeOffer.getUrl().url());
+        if (price.isEmpty()) {
+            InactiveOffer inactiveOffer = activeOffer.deactivate();
+            offerPersistencePort.save(inactiveOffer);
+            LOG.debug("Offer {} with url {} was deactivated", activeOffer.getId(), activeOffer.getUrl().url());
+        } else {
+            pricePointPersistencePort.save(price
+                    .map(p -> new PricePoint(
+                            activeOffer.getId(),
+                            p,
+                            LocalDateTime.now())
+                    ).get()
+            );
+            LOG.debug("Fetched price {} for offer {} with url {}", price, activeOffer.getId(), activeOffer.getUrl().url());
+        }
     }
 }
