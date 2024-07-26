@@ -8,7 +8,7 @@ spring:
           keycloak:
             provider: kc-provider
             clientId: frontend-app
-            clientSecret: hzRoxXRoyT3J6jwgOsq3rYjiAlFHCXXP
+            clientSecret: ${KC_CLIENT_SECRET}
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_basic
             redirect-uri: "http://localhost:8081/login/oauth2/code/{registrationId}"
@@ -28,6 +28,10 @@ spring:
             dismiss404: true
       http2client:
         enabled: true
+  config:
+    import: optional:file:.env[.properties]
+  profiles:
+    default: dev
 server:
   port: 8081
 management:
