@@ -1,4 +1,4 @@
-package com.ludigi.product.adapter.in.rest;
+package com.ludigi.priceflow.product.adapter.in.rest;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

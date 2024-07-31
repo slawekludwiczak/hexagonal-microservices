@@ -1,15 +1,14 @@
-package com.ludigi.product.adapter.out;
+package com.ludigi.priceflow.product.adapter.out;
 
 import com.ludigi.priceflow.product.Product;
 import com.ludigi.priceflow.product.ProductId;
 import com.ludigi.priceflow.product.UserId;
-import com.ludigi.priceflow.product.adapter.out.ProductEntity;
-import com.ludigi.priceflow.product.adapter.out.ProductEntityMapper;
 import org.junit.jupiter.api.Test;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ProductEntityMapperTest {
 

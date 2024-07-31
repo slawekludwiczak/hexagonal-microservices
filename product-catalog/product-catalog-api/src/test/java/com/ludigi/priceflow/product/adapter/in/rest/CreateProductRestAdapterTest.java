@@ -1,8 +1,7 @@
-package com.ludigi.product.adapter.in.rest;
+package com.ludigi.priceflow.product.adapter.in.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ludigi.priceflow.product.ProductId;
-import com.ludigi.priceflow.product.adapter.in.rest.CreateProductRestAdapter;
 import com.ludigi.priceflow.product.port.in.ProductCommandPort;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

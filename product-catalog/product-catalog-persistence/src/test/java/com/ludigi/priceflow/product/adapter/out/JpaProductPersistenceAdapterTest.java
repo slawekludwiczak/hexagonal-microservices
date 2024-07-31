@@ -1,7 +1,5 @@
-package com.ludigi.product.adapter.out;
+package com.ludigi.priceflow.product.adapter.out;
 
-import com.ludigi.priceflow.product.adapter.out.ProductEntity;
-import com.ludigi.priceflow.product.adapter.out.ProductEntityRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -9,7 +7,8 @@ import org.springframework.orm.jpa.JpaSystemException;
 
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @DataJpaTest
 class JpaProductPersistenceAdapterTest {

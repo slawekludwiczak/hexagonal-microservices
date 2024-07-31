@@ -1,17 +1,20 @@
 package com.ludigi.priceflow.offer.scraping.scraper.jsoup;
 
+import com.ludigi.priceflow.offer.scraping.scraper.HttpStatus;
+import com.ludigi.priceflow.offer.scraping.scraper.Response;
 import com.ludigi.priceflow.offer.scraping.scraper.Scraper;
 import com.ludigi.priceflow.offer.scraping.scraper.exception.ScraperException;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 
 import java.io.IOException;
-import java.io.UncheckedIOException;
 
 public class JsoupScraper implements Scraper {
     @Override
-    public String fetchHtml(String url) {
+    public Response fetchHtml(String url) {
         try {
-            return Jsoup.connect(url).get().html();
+            Connection.Response response = Jsoup.connect(url).execute();
+            return new Response(HttpStatus.from(response.statusCode()), response.body());
         } catch (IOException e) {
             throw new ScraperException(e);
         }
