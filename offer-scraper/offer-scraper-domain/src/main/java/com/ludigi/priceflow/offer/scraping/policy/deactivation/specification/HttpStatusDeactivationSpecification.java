@@ -1,4 +1,4 @@
-package com.ludigi.priceflow.offer.scraping.policy.deactivation;
+package com.ludigi.priceflow.offer.scraping.policy.deactivation.specification;
 
 import com.ludigi.priceflow.offer.scraping.scraper.HttpStatus;
 import com.ludigi.priceflow.offer.scraping.scraper.Response;

@@ -5,8 +5,8 @@ import com.ludigi.priceflow.offer.common.vo.PageType;
 import com.ludigi.priceflow.offer.common.vo.Price;
 import com.ludigi.priceflow.offer.common.vo.Selector;
 import com.ludigi.priceflow.offer.scraping.extractor.PriceExtractor;
-import com.ludigi.priceflow.offer.scraping.policy.deactivation.HttpStatusDeactivationSpecification;
-import com.ludigi.priceflow.offer.scraping.policy.deactivation.NoPriceFoundDeactivationSpecification;
+import com.ludigi.priceflow.offer.scraping.policy.deactivation.OfferDeactivationPolicy;
+import com.ludigi.priceflow.offer.scraping.policy.deactivation.specification.jsoup.JsoupElementExtractor;
 import com.ludigi.priceflow.offer.scraping.scraper.Response;
 
 import java.util.Optional;
@@ -29,20 +29,20 @@ public class ActiveOffer {
 
     public Optional<Price> fetchCurrentPrice(PriceExtractor priceExtractor) {
         Response response = pageType.getScraper().fetchHtml(url.url());
-        HttpStatusDeactivationSpecification httpStatusDeactivationSpecification = new HttpStatusDeactivationSpecification();
-        if (httpStatusDeactivationSpecification.test(response)) {
-            deactivate();
+        OfferDeactivationPolicy offerDeactivationPolicy = new OfferDeactivationPolicy(
+                this,
+                response,
+                new JsoupElementExtractor()
+        );
+        offerDeactivationPolicy.apply();
+        if (active) {
+            return priceExtractor.extractPrice(response.body(), selector);
+        } else {
             return Optional.empty();
         }
-        Optional<Price> price = priceExtractor.extractPrice(response.body(), selector);
-        NoPriceFoundDeactivationSpecification noPriceDeactivationSpecification = new NoPriceFoundDeactivationSpecification();
-        if (noPriceDeactivationSpecification.test(price)) {
-            deactivate();
-        }
-        return price;
     }
 
-    private void deactivate() {
+    public void deactivate() {
         active = false;
     }
 
