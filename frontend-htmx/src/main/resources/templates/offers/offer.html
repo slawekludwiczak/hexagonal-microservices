@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 </head>
 <body class="dark:bg-gray-800">
+<nav th:replace="~{fragments/fragments :: #navbar}"></nav>
 <div class="flex flex-col items-center container mx-auto mb-16">
     <div th:replace="~{fragments/fragments :: breadcrumbs(${links})}"></div>
     <h1 class="text-xl my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-flex">
