@@ -23,7 +23,8 @@ public class Product {
                     url,
                     selector,
                     pageType,
-                    refreshPeriod
+                    refreshPeriod,
+                    true
             );
         } else {
             throw new AlreadyExistsException("Product %s already has offer %s".formatted(productId.value(), url.url()));

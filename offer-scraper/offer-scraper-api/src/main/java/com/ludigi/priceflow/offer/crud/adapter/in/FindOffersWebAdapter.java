@@ -1,5 +1,6 @@
 package com.ludigi.priceflow.offer.crud.adapter.in;
 
+import com.ludigi.priceflow.offer.crud.Offer;
 import com.ludigi.priceflow.offer.crud.port.in.FindOfferUseCase;
 import com.ludigi.priceflow.offer.crud.port.in.FindOffersUseCase;
 import org.springframework.http.HttpStatus;
@@ -26,34 +27,30 @@ public class FindOffersWebAdapter {
     OffersResponse findOffersByProductId(@RequestParam("productId") String productId) {
         List<OfferResponse> productOffers = findOffersUseCase.findAllByProductId(productId)
                 .stream()
-                .map(offer -> new OfferResponse(
-                        offer.getId(),
-                        offer.getUrl().url(),
-                        offer.getProductId().value(),
-                        offer.getSelector().selector(),
-                        offer.getSelector().type().name(),
-                        offer.getPageType().name(),
-                        offer.getRefreshPeriod().value(),
-                        offer.getRefreshPeriod().unit().name()
-                )).toList();
+                .map(FindOffersWebAdapter::toResponse).toList();
         return new OffersResponse(productOffers);
     }
 
     @GetMapping("/api/offers/{id}")
     OfferResponse findOffersByProductId(@PathVariable("id") UUID offerId) {
         return findOfferUseCase.findById(offerId)
-                .map(offer -> new OfferResponse(
-                        offer.getId(),
-                        offer.getUrl().url(),
-                        offer.getProductId().value(),
-                        offer.getSelector().selector(),
-                        offer.getSelector().type().name(),
-                        offer.getPageType().name(),
-                        offer.getRefreshPeriod().value(),
-                        offer.getRefreshPeriod().unit().name()
-                )).orElseThrow(
+                .map(FindOffersWebAdapter::toResponse).orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND)
                 );
+    }
+
+    private static OfferResponse toResponse(Offer offer) {
+        return new OfferResponse(
+                offer.getId(),
+                offer.getUrl().url(),
+                offer.getProductId().value(),
+                offer.getSelector().selector(),
+                offer.getSelector().type().name(),
+                offer.getPageType().name(),
+                offer.getRefreshPeriod().value(),
+                offer.getRefreshPeriod().unit().name(),
+                offer.isActive()
+        );
     }
 
     record OfferResponse(UUID id,
@@ -63,7 +60,8 @@ public class FindOffersWebAdapter {
                          String selectorType,
                          String pageType,
                          long refreshValue,
-                         String refreshUnit) {
+                         String refreshUnit,
+                         boolean active) {
     }
 
     record OffersResponse(List<OfferResponse> offers) {

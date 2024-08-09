@@ -27,7 +27,8 @@ class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
                 offer.getSelector().type().name(),
                 offer.getPageType().name(),
                 offer.getRefreshPeriod().asDuration(),
-                offer.getRefreshPeriod().unit()
+                offer.getRefreshPeriod().unit(),
+                offer.isActive()
         );
         offerCrudJpaRepository.save(offerCrudJpaModel);
     }
@@ -53,7 +54,8 @@ class OfferCrudPersistenceAdapter implements OfferCrudPersistencePort {
                 new OfferUrl(entity.getUrl()),
                 new Selector(entity.getSelector(), SelectorType.valueOf(entity.getSelectorType())),
                 PageType.valueOf(entity.getPageType()),
-                RefreshPeriod.from(entity.getRefreshInterval(), entity.getRefreshUnit())
+                RefreshPeriod.from(entity.getRefreshInterval(), entity.getRefreshUnit()),
+                entity.isActive()
         );
     }
 }

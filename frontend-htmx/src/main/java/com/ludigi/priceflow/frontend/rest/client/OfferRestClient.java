@@ -5,10 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import static java.util.stream.Collectors.averagingDouble;
 import static java.util.stream.Collectors.groupingBy;
@@ -51,7 +48,11 @@ public interface OfferRestClient {
         PLN
     }
 
-    record OffersResponse(List<OfferResponse> offers) { }
+    record OffersResponse(List<OfferResponse> offers) {
+        public OffersResponse {
+            Collections.sort(offers);
+        }
+    }
 
     record OfferResponse(UUID id,
                          String offerUrl,
@@ -60,7 +61,13 @@ public interface OfferRestClient {
                          String selectorType,
                          String pageType,
                          int refreshValue,
-                         String refreshUnit) { }
+                         String refreshUnit,
+                         boolean active) implements Comparable<OfferResponse> {
+        @Override
+        public int compareTo(OfferResponse o) {
+            return - Boolean.compare(this.active, o.active);
+        }
+    }
 
     record CreateOfferCommand(
             String offerUrl,

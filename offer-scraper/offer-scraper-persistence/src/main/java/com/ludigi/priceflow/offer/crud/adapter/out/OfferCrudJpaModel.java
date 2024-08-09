@@ -20,11 +20,20 @@ class OfferCrudJpaModel {
     private Duration refreshInterval;
     @Enumerated(EnumType.STRING)
     private ChronoUnit refreshUnit;
+    private boolean active;
 
     public OfferCrudJpaModel() {
     }
 
-    public OfferCrudJpaModel(UUID id, UUID productId, String url, String selector, String selectorType, String pageType, Duration refreshInterval, ChronoUnit refreshUnit) {
+    public OfferCrudJpaModel(UUID id,
+                             UUID productId,
+                             String url,
+                             String selector,
+                             String selectorType,
+                             String pageType,
+                             Duration refreshInterval,
+                             ChronoUnit refreshUnit,
+                             boolean active) {
         this.id = id;
         this.productId = productId;
         this.url = url;
@@ -33,6 +42,7 @@ class OfferCrudJpaModel {
         this.pageType = pageType;
         this.refreshInterval = refreshInterval;
         this.refreshUnit = refreshUnit;
+        this.active = active;
     }
 
     public UUID getId() {
@@ -97,5 +107,13 @@ class OfferCrudJpaModel {
 
     public void setRefreshUnit(ChronoUnit refreshUnit) {
         this.refreshUnit = refreshUnit;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }

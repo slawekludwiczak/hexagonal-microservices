@@ -10,14 +10,23 @@
 <nav th:replace="~{fragments/fragments :: #navbar}"></nav>
 <div class="flex flex-col items-center container mx-auto mb-16">
     <div th:replace="~{fragments/fragments :: breadcrumbs(${links})}"></div>
-    <h1 class="text-xl my-8 font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 inline-flex">
+    <h1 class="text-xl mt-8 font-extrabold inline-flex"
+    th:classappend="${offer.active? 'text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600' : 'text-gray-400'}">
         <span th:text="${offer.offerUrl()}">http://olx.pl/asdf</span>
         <a href="#" th:href="@{${offer.offerUrl()}}" class="ml-4" target="_blank">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 stoke-1 stroke-primary-500 hover:stroke-primary-700">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke-width="1.5"
+                 stroke="currentColor"
+                 class="w-8 h-8 stoke-1"
+                 th:classappend="${offer.active? 'stroke-primary-500 hover:stroke-primary-700' : 'stroke-gray-300 hover:stroke-gray-700'}"
+            >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
             </svg>
         </a>
     </h1>
+    <p class="text-lg mb-8 text-gray-400" th:unless="${offer.active}">This offer is expired</p>
 
     <div class="relative h-80 w-full">
         <canvas id="chart"></canvas>
@@ -37,7 +46,8 @@
                    th:field="*{selector}"
                    placeholder="div > p.price"
                    required
-                   class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                   th:disabled="not ${offer.active}"
+                   class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-50"/>
         </div>
         <div class="mb-5">
             <label for="selectorType" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
@@ -46,6 +56,7 @@
                     name="selectorType"
                     th:field="*{selectorType}"
                     required
+                    th:disabled="not ${offer.active}"
                     class="disabled:opacity-50 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="CSS">CSS</option>
             </select>
@@ -56,6 +67,7 @@
                     name="pageType"
                     th:field="*{pageType}"
                     required
+                    th:disabled="not ${offer.active}"
                     class="disabled:opacity-50 focus:outline-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="HTML">HTML</option>
             </select>
@@ -69,7 +81,8 @@
                    th:field="*{refreshValue}"
                    placeholder="15"
                    required
-                   class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                   th:disabled="not ${offer.active}"
+                   class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 disabled:opacity-50"/>
         </div>
         <div class="mb-5">
             <label for="refreshUnit" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Selector
@@ -78,6 +91,7 @@
                     name="refreshUnit"
                     th:field="*{refreshUnit}"
                     required
+                    th:disabled="not ${offer.active}"
                     class="bg-gray-50 focus:outline-none border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 <option value="SECONDS">Seconds</option>
                 <option value="MINUTES" selected>Minutes</option>
@@ -86,7 +100,8 @@
             </select>
         </div>
         <button type="submit"
-                class="block mx-auto text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                th:disabled="not ${offer.active}"
+                class="block mx-auto text-white font-medium rounded-lg px-5 py-2.5 text-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 disabled:opacity-50">
             Update Offer
         </button>
     </form>

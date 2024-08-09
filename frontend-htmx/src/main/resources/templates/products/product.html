@@ -31,8 +31,12 @@
             <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
                 th:each="offer: ${offers}">
                 <td class="px-6 py-4 font-medium whitespace-nowrap text-center">
-                    <a href="#" th:href="@{|/offers/${offer.id}|}" th:text="${offer.offerUrl}"
-                       class="hover:underline text-primary-500">
+                    <a href="#"
+                       th:href="@{|/offers/${offer.id}|}"
+                       th:text="${offer.offerUrl}"
+                       class="hover:underline"
+                       th:classappend="${offer.active? 'text-primary-500' : 'text-gray-400'}"
+                    >
                         http://olx.pl/abcdef
                     </a>
                 </td>

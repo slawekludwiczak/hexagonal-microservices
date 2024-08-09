@@ -11,19 +11,22 @@ public class Offer {
     private Selector selector;
     private PageType pageType;
     private RefreshPeriod refreshPeriod;
+    private boolean active;
 
     public Offer(UUID id,
                  ProductId productId,
                  OfferUrl url,
                  Selector selector,
                  PageType pageType,
-                 RefreshPeriod refreshPeriod) {
+                 RefreshPeriod refreshPeriod,
+                 boolean active) {
         this.id = id;
         this.productId = productId;
         this.url = url;
         this.selector = selector;
         this.pageType = pageType;
         this.refreshPeriod = refreshPeriod;
+        this.active = active;
     }
 
     public UUID getId() {
@@ -60,5 +63,25 @@ public class Offer {
 
     public void setRefreshPeriod(RefreshPeriod refreshPeriod) {
         this.refreshPeriod = refreshPeriod;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setProductId(ProductId productId) {
+        this.productId = productId;
+    }
+
+    public void setUrl(OfferUrl url) {
+        this.url = url;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
